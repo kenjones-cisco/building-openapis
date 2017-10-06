@@ -2,12 +2,12 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Building OpenAPIs\n\n\nThere are many different resources that provides part of the story about building APIs, specially OpenAPIs.\n\n\nThese collated resource (reference to original sources provided) should help expedite the ability to\nstart building RESTful APIs.\n\n\nThe resources include reference information on the topic of REST and OpenAPI, best practices, and tutorials\non how to get started building your own RESTful APIs using an industry standard API specification and the growing\necosystem of tools.\n\n\nFeedback and Contributions Welcome", 
+            "text": "Building OpenAPIs\n\n\nThere are many different resources that provides part of the story about building APIs, specially OpenAPIs.\n\n\nCollated resources (reference to original sources provided) should help expedite the ability to\nstart building RESTful APIs.\n\n\nThe resources include reference information on the topic of REST and OpenAPI, best practices, and tutorials\non how to get started building your own RESTful APIs using an industry standard API specification and the growing\necosystem of tools.\n\n\nFeedback and Contributions Welcome", 
             "title": "Overview"
         }, 
         {
             "location": "/#building-openapis", 
-            "text": "There are many different resources that provides part of the story about building APIs, specially OpenAPIs.  These collated resource (reference to original sources provided) should help expedite the ability to\nstart building RESTful APIs.  The resources include reference information on the topic of REST and OpenAPI, best practices, and tutorials\non how to get started building your own RESTful APIs using an industry standard API specification and the growing\necosystem of tools.  Feedback and Contributions Welcome", 
+            "text": "There are many different resources that provides part of the story about building APIs, specially OpenAPIs.  Collated resources (reference to original sources provided) should help expedite the ability to\nstart building RESTful APIs.  The resources include reference information on the topic of REST and OpenAPI, best practices, and tutorials\non how to get started building your own RESTful APIs using an industry standard API specification and the growing\necosystem of tools.  Feedback and Contributions Welcome", 
             "title": "Building OpenAPIs"
         }, 
         {
