@@ -1,0 +1,39 @@
+docs_dir: content
+site_dir: docs
+site_name: Building OpenAPIs
+site_author: Kenny Jones
+
+repo_name: 'kenjones-cisco/building-openapis'
+repo_url: 'https://github.com/kenjones-cisco/building-openapis'
+
+theme: 'material'
+
+pages:
+  - Overview: index.md
+  - References:
+    - REST APIs: references/rest.md
+    - OpenAPI: references/openapi.md
+    - API Design: references/design.md
+    - API Development: references/development.md
+  - Best Practices:
+    - API Design: best-practices/design.md
+    - API Implementation: best-practices/implementation.md
+  - Tutorials:
+    - Setup: tutorials/setup.md
+    - Generating Server Stubs:
+      - Golang API Server: tutorials/server_golang.md
+      - Java API Server: tutorials/server_java.md
+      - Python API Server: tutorials/server_python.md
+    - Generating Clients:
+      - Golang API Client: tutorials/client_golang.md
+      - Java API Client: tutorials/client_java.md
+      - Python API Client: tutorials/client_python.md
+      - Postman API Client: tutorials/client_postman.md
+    - Generating Documentation: tutorials/documentation.md
+  - License: license.md
+
+markdown_extensions:
+  - markdown_include.include:
+      base_path: content
+  - toc(permalink=true)
+  - admonition

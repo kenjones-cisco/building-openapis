@@ -1,0 +1,981 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+        <meta name="author" content="Kenny Jones">
+      
+      
+        <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.10.2">
+    
+    
+      
+        <title>API Design - Building OpenAPIs</title>
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr-e826f8942a.js"></script>
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application-408828a02a.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+  
+  
+  
+    <body>
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Building OpenAPIs" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon md-icon--home"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+                <span class="md-header-nav__parent">
+                  Best Practices
+                </span>
+              
+            
+            API Design
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">&#xE5CD;</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="" data-md-lang-tokenizer="[\s\-]+">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/kenjones-cisco/building-openapis" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      kenjones-cisco/building-openapis
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <div class="md-nav__button md-logo">
+      
+        <i class="md-icon md-icon--home"></i>
+      
+    </div>
+    Building OpenAPIs
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/kenjones-cisco/building-openapis" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      kenjones-cisco/building-openapis
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      References
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        References
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/rest/" title="REST APIs" class="md-nav__link">
+      REST APIs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/openapi/" title="OpenAPI" class="md-nav__link">
+      OpenAPI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/design/" title="API Design" class="md-nav__link">
+      API Design
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/development/" title="API Development" class="md-nav__link">
+      API Development
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Best Practices
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Best Practices
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        API Design
+      </label>
+    
+    <a href="./" title="API Design" class="md-nav__link md-nav__link--active">
+      API Design
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resources" title="Resources" class="md-nav__link">
+    Resources
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#status-codes" title="Status Codes" class="md-nav__link">
+    Status Codes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods" title="Methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errors" title="Errors" class="md-nav__link">
+    Errors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formats" title="Formats" class="md-nav__link">
+    Formats
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filtering-sorting-field-selection-pagination" title="Filtering, Sorting, Field Selection &amp; Pagination" class="md-nav__link">
+    Filtering, Sorting, Field Selection &amp; Pagination
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#versioning" title="Versioning" class="md-nav__link">
+    Versioning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security" title="Security" class="md-nav__link">
+    Security
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caching" title="Caching" class="md-nav__link">
+    Caching
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../implementation/" title="API Implementation" class="md-nav__link">
+      API Implementation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/setup/" title="Setup" class="md-nav__link">
+      Setup
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2">
+    
+    <label class="md-nav__link" for="nav-4-2">
+      Generating Server Stubs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-2">
+        Generating Server Stubs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/server_golang/" title="Golang API Server" class="md-nav__link">
+      Golang API Server
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/server_java/" title="Java API Server" class="md-nav__link">
+      Java API Server
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/server_python/" title="Python API Server" class="md-nav__link">
+      Python API Server
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+    
+    <label class="md-nav__link" for="nav-4-3">
+      Generating Clients
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        Generating Clients
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/client_golang/" title="Golang API Client" class="md-nav__link">
+      Golang API Client
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/client_java/" title="Java API Client" class="md-nav__link">
+      Java API Client
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/client_python/" title="Python API Client" class="md-nav__link">
+      Python API Client
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/client_postman/" title="Postman API Client" class="md-nav__link">
+      Postman API Client
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/documentation/" title="Generating Documentation" class="md-nav__link">
+      Generating Documentation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../license/" title="License" class="md-nav__link">
+      License
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resources" title="Resources" class="md-nav__link">
+    Resources
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#status-codes" title="Status Codes" class="md-nav__link">
+    Status Codes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods" title="Methods" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errors" title="Errors" class="md-nav__link">
+    Errors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formats" title="Formats" class="md-nav__link">
+    Formats
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filtering-sorting-field-selection-pagination" title="Filtering, Sorting, Field Selection &amp; Pagination" class="md-nav__link">
+    Filtering, Sorting, Field Selection &amp; Pagination
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#versioning" title="Versioning" class="md-nav__link">
+    Versioning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security" title="Security" class="md-nav__link">
+    Security
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caching" title="Caching" class="md-nav__link">
+    Caching
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="api-design-standards-best-practices">API Design Standards &amp; Best Practices<a class="headerlink" href="#api-design-standards-best-practices" title="Permanent link">&para;</a></h1>
+<p>Credit:</p>
+<ul>
+<li><a href="http://www.restapitutorial.com/">A RESTful Tutorial</a></li>
+<li><a href="https://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/">10 Best Practices for Better RESTful API</a></li>
+<li><a href="http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api">Best Practices for Designing a Pragmatic RESTful API</a></li>
+<li><a href="https://www.suse.com/communities/blog/best-practice-api-versioning-http-rest-interfaces/">Best Practice: API Versioning for HTTP REST Interfaces</a></li>
+</ul>
+<h4 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h4>
+<p>Producing a great API is 80% art and 20% science. Creating a URL hierarchy representing sensible
+resources is the art part. Having sensible resource names (which are just URL paths, such as
+/customers/12345/orders) improves the clarity of what a given request does.</p>
+<ul>
+<li>Resource names should be <strong>nouns</strong>; avoid <strong>verbs</strong> as resource names.</li>
+<li>Use <strong>plurals</strong> in URL segments to keep your API URIs consistent across all HTTP methods, using the collection metaphor.</li>
+<li>Avoid using collection verbiage in URLs. For example 'customer_list' as a resource. Use pluralization to indicate the collection metaphor (e.g. customers vs. customer_list).</li>
+<li>Use lower-case in URL segments, separating words with underscores <code>_</code> or hyphens <code>-</code>. Some servers ignore case so it's best to be clear.</li>
+<li>Use identifiers in your URLs instead of in the query-string. Using URL query-string parameters is fantastic for filtering, but not for resource names.</li>
+<li>Design for your clients, not for your data.</li>
+<li>Leverage the hierarchical nature of the URL to imply structure (relationships). e.g. /customers/1107/orders</li>
+<li>Keep URLs as short as possible, with as few segments as makes sense. <strong>Recommend</strong>: Max of 3 levels deep</li>
+</ul>
+<h4 id="status-codes">Status Codes<a class="headerlink" href="#status-codes" title="Permanent link">&para;</a></h4>
+<p>Response status codes are part of the HTTP specification. There are quite a number of them to
+address the most common situations. In the spirit of having our RESTful services embrace the HTTP
+specification, our Web APIs should return relevant HTTP status codes.</p>
+<p>Most common HTTP Response Status Codes</p>
+<table>
+<thead>
+<tr>
+<th align="center">Status Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">200 OK</td>
+<td>General success status code. This is the most common code. Used to indicate success.</td>
+</tr>
+<tr>
+<td align="center">201 CREATED</td>
+<td>Successful creation occurred. Set the Location header to contain a link to the newly-created resource. Response body content may or may not be present.</td>
+</tr>
+<tr>
+<td align="center">204 NO CONTENT</td>
+<td>Indicates success but nothing is in the response body, often used for DELETE and PUT operations.</td>
+</tr>
+<tr>
+<td align="center">400 BAD REQUEST</td>
+<td>General error for when fulfilling the request would cause an invalid state. Domain validation errors, missing data, etc. are some examples.</td>
+</tr>
+<tr>
+<td align="center">401 UNAUTHORIZED</td>
+<td>Error code response for missing or invalid authentication token.</td>
+</tr>
+<tr>
+<td align="center">403 FORBIDDEN</td>
+<td>Error code for when the user is not authorized to perform the operation or the resource is unavailable for some reason (e.g. time constraints, etc.).</td>
+</tr>
+<tr>
+<td align="center">404 NOT FOUND</td>
+<td>Used when the requested resource is not found, whether it doesn't exist or if there was a 401 or 403 that, for security reasons, the service wants to mask.</td>
+</tr>
+<tr>
+<td align="center">405 METHOD NOT ALLOWED</td>
+<td>Used to indicate that the requested URL exists, but the requested HTTP method is not applicable. The Allow HTTP header must be set when returning a 405 to indicate the HTTP methods that are supported.</td>
+</tr>
+<tr>
+<td align="center">409 CONFLICT</td>
+<td>Whenever a resource conflict would be caused by fulfilling the request.</td>
+</tr>
+<tr>
+<td align="center">500 INTERNAL SERVER ERROR</td>
+<td>Never return this intentionally. The general catch-all error when the server-side throws an exception. Use this only for errors that the consumer cannot address from their end.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h4>
+<p>Methods on resources should be defined using standard HTTP verbs</p>
+<table>
+<thead>
+<tr>
+<th align="center">HTTP Verb</th>
+<th align="center">CRUD</th>
+<th>Entire Collection (e.g. /customers)</th>
+<th>Specific Item (e.g. /customes/{id})</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">POST</td>
+<td align="center">Create</td>
+<td>201 (Created), 'Location' header with link to /customers/{id} containing new ID.</td>
+<td>404 (Not Found), 409 (Conflict) if resource already exists.</td>
+</tr>
+<tr>
+<td align="center">GET</td>
+<td align="center">READ</td>
+<td>200 (OK), list of customers. Use pagination, sorting, and filtering to navigate big lists.</td>
+<td>200 (OK), single customer, 404 (Not Found), if ID not found or invalid.</td>
+</tr>
+<tr>
+<td align="center">PUT</td>
+<td align="center">Update/Replace</td>
+<td>405 (Method Not Allowed)</td>
+<td>200 (OK) or 204 (No Content), 404 (Not Found), if ID not found or invalid.</td>
+</tr>
+<tr>
+<td align="center">PATCH</td>
+<td align="center">Update/Modify</td>
+<td>405 (Method Not Allowed)</td>
+<td>200 (OK) or 204 (No Content), 404 (Not Found), if ID not found or invalid.</td>
+</tr>
+<tr>
+<td align="center">DELETE</td>
+<td align="center">Delete</td>
+<td>405 (Method Not Allowed)</td>
+<td>200 (OK), 404 (Not Found), if ID not found or invalid.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>GET requests must not change any underlying resource data.</p>
+</div>
+<h4 id="errors">Errors<a class="headerlink" href="#errors" title="Permanent link">&para;</a></h4>
+<p>All errors should return a payload with details about the error.</p>
+<p>Minimal attributes of the error payload</p>
+<ul>
+<li>message: Useful message about the cause of the error</li>
+<li>code: An identifier that can be used to get additional information.</li>
+</ul>
+<h4 id="formats">Formats<a class="headerlink" href="#formats" title="Permanent link">&para;</a></h4>
+<p>All APIs should support JSON formats by default. Optionally support other formats, e.g. XML.</p>
+<p>Use HTTP Header to specify serialzation formats.</p>
+<pre><code>*Content-Type* defines the request format.
+*Accept* defines a list of acceptable response formats.
+</code></pre>
+<h4 id="filtering-sorting-field-selection-pagination">Filtering, Sorting, Field Selection &amp; Pagination<a class="headerlink" href="#filtering-sorting-field-selection-pagination" title="Permanent link">&para;</a></h4>
+<p>When performing GET on a collection clients will need the ability to filter, sort, paginate, and/or limit fields in the results.</p>
+<p><strong>Filtering</strong></p>
+<p>Use a unique query parameter for all fields or a query language for filtering.</p>
+<pre><code>GET /cars?color=red
+GET /cars?seats&lt;=2
+</code></pre>
+
+<p><strong>Sorting</strong></p>
+<p>Allow ascending and descending sorting over multiple fields.</p>
+<pre><code>GET /cars?sort=-manufactorer,+model
+</code></pre>
+
+<p><strong>Field Selection</strong></p>
+<p>Mobile clients display just a few attributes in a list. They don’t need all attributes of a resource.
+Give the API consumer the ability to choose returned fields. This will also reduce the network traffic
+and speed up the usage of the API.</p>
+<pre><code>GET /cars?fields=manufacturer,model,id,color
+</code></pre>
+
+<p><strong>Paging</strong></p>
+<p>Use limit and offset. It is flexible for the user and common in leading databases.</p>
+<pre><code>GET /cars?offset=10&amp;limit=5
+</code></pre>
+
+<p>Use the HTTP Header <code>Link</code> to return a set of ready-made links.</p>
+<pre><code>Link: &lt;https://api.github.com/user/repos?page=3&amp;per_page=100&gt;; rel=&quot;next&quot;, &lt;https://api.github.com/user/repos?page=50&amp;per_page=100&gt;; rel=&quot;last&quot;
+</code></pre>
+
+<p>An API that requires sending a count can use a custom HTTP header like <code>X-Total-Count</code>.</p>
+<h4 id="versioning">Versioning<a class="headerlink" href="#versioning" title="Permanent link">&para;</a></h4>
+<p>Always version your API. Use <a href="http://semver.org/">Semantic Versioning</a> for defining versions.</p>
+<p>The major version should be included in the URL.</p>
+<pre><code>/blog/api/v1
+</code></pre>
+
+<p>Use HTTP content type negotiation to expose minor verions. Leverage the versioned vnd content types.</p>
+<p>There is an <a href="https://tools.ietf.org/html/rfc6838#section-3.2">HTTP RFC 6838</a> for custom vendor-specific MIME types.
+It reserves a whole “vendor tree”, with free-form entries looking like type/vnd.producer’s name followed
+by media type name [+suffix]</p>
+<pre><code>application/vnd.crowbar.v2.3+json
+</code></pre>
+
+<p>In this case, the major version provides structural stability of the API as a whole while the
+minor versions accounts for smaller changes (field deprecations, endpoint changes, etc).</p>
+<h4 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h4>
+<p>Always use SSL. No exceptions.</p>
+<p>Use <a href="https://oauth.net/2/">OAuth2</a> for authentication. The defacto industry standard for APIs.</p>
+<h4 id="caching">Caching<a class="headerlink" href="#caching" title="Permanent link">&para;</a></h4>
+<p>HTTP provides a built-in caching framework! All you have to do is include some additional outbound
+response headers and do a little validation when you receive some inbound request headers.</p>
+<p>There are 2 approaches: <a href="http://en.wikipedia.org/wiki/HTTP_ETag">ETag</a> and <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.29">Last-Modified</a></p>
+<p><strong>ETag</strong>: When generating a response, include a HTTP header <code>ETag</code> containing a hash or checksum of the
+representation. This value should change whenever the output representation changes. Now, if an
+inbound HTTP requests contains a <code>If-None-Match</code> header with a matching ETag value, the API should
+return a <code>304 Not Modified</code> status code instead of the output representation of the resource.</p>
+<p><strong>Last-Modified</strong>: This basically works like to ETag, except that it uses timestamps. The response
+header <code>Last-Modified</code> contains a timestamp in <a href="http://www.ietf.org/rfc/rfc1123.txt">RFC 1123</a> format
+which is validated against <code>If-Modified-Since</code>. Note that the HTTP spec has had 3 different
+acceptable date formats and the server should be prepared to accept any one of them.</p>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../references/development/" title="API Development" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                API Development
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../implementation/" title="API Implementation" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                API Implementation
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application-f3ab9e5ff8.js"></script>
+      
+      
+      <script>app.initialize({url:{base:"../.."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>
