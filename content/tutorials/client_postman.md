@@ -2,12 +2,16 @@
 
 ### Summary
 
-This tutorial will explain how to generate an API client in [Postman](https://www.getpostman.com/) using an API definition.
+This tutorial will explain how to generate an API client in [Postman](https://www.getpostman.com/) :fa-external-link: using an API definition.
+
+!!! note
+    A powerful GUI platform to make your API development faster & easier, from building API requests through testing,
+    documentation and sharing.
 
 
 ### Install Postman
 
-Go to https://www.getpostman.com/ and follow the directions for installing Postman on your local computer.
+Go to [https://www.getpostman.com/](https://www.getpostman.com/) :fa-external-link: and follow the directions for installing Postman on your local computer.
 
 
 ### Generate Client
@@ -19,4 +23,4 @@ Go to https://www.getpostman.com/ and follow the directions for installing Postm
 You should now see a Collection named `Issue Tracker` in the list.
 
 
-To learn more about Postman, you can read the [Postman Docs](https://www.getpostman.com/docs/).
+To learn more about Postman, you can read the [Postman Docs](https://www.getpostman.com/docs/) :fa-external-link:.

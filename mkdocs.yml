@@ -8,6 +8,9 @@ repo_url: 'https://github.com/kenjones-cisco/building-openapis'
 
 theme: 'material'
 
+extra_css:
+  - 'stylesheets/font-awesome.css'
+
 pages:
   - Overview: index.md
   - References:
@@ -37,3 +40,4 @@ markdown_extensions:
       base_path: content
   - toc(permalink=true)
   - admonition
+  - fontawesome_markdown

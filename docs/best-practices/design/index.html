@@ -39,6 +39,8 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
     
+      <link rel="stylesheet" href="../../stylesheets/font-awesome.css">
+    
     
   </head>
   
@@ -704,10 +706,13 @@
                 <h1 id="api-design-standards-best-practices">API Design Standards &amp; Best Practices<a class="headerlink" href="#api-design-standards-best-practices" title="Permanent link">&para;</a></h1>
 <p>Credit:</p>
 <ul>
-<li><a href="http://www.restapitutorial.com/">A RESTful Tutorial</a></li>
-<li><a href="https://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/">10 Best Practices for Better RESTful API</a></li>
-<li><a href="http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api">Best Practices for Designing a Pragmatic RESTful API</a></li>
-<li><a href="https://www.suse.com/communities/blog/best-practice-api-versioning-http-rest-interfaces/">Best Practice: API Versioning for HTTP REST Interfaces</a></li>
+<li><a href="http://www.restapitutorial.com/">A RESTful Tutorial</a> <i class="fa fa-external-link"></i></li>
+<li><a href="http://restcookbook.com/">Rest Cookbook</a> <i class="fa fa-external-link"></i></li>
+<li><a href="http://www.kennethlange.com/posts/The-Ultimate-Checklist-for-REST-APIs.html">The Ultimate Checklist for REST APIs</a> <i class="fa fa-external-link"></i></li>
+<li><a href="http://www.kennethlange.com/posts/7_tips_for_designing_a_better_rest_api.html">7 Tips for Designing a Better REST API</a> <i class="fa fa-external-link"></i></li>
+<li><a href="https://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/">10 Best Practices for Better RESTful API</a> <i class="fa fa-external-link"></i></li>
+<li><a href="http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api">Best Practices for Designing a Pragmatic RESTful API</a> <i class="fa fa-external-link"></i></li>
+<li><a href="https://www.suse.com/communities/blog/best-practice-api-versioning-http-rest-interfaces/">Best Practice: API Versioning for HTTP REST Interfaces</a> <i class="fa fa-external-link"></i></li>
 </ul>
 <h4 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h4>
 <p>Producing a great API is 80% art and 20% science. Creating a URL hierarchy representing sensible
@@ -716,7 +721,7 @@ resources is the art part. Having sensible resource names (which are just URL pa
 <ul>
 <li>Resource names should be <strong>nouns</strong>; avoid <strong>verbs</strong> as resource names.</li>
 <li>Use <strong>plurals</strong> in URL segments to keep your API URIs consistent across all HTTP methods, using the collection metaphor.</li>
-<li>Avoid using collection verbiage in URLs. For example 'customer_list' as a resource. Use pluralization to indicate the collection metaphor (e.g. customers vs. customer_list).</li>
+<li>Avoid using collection verbiage in URLs. For example do <strong>not</strong> use 'customer_list' as a resource. Use pluralization, <strong>customers</strong> to indicate the collection metaphor (e.g. customers vs. customer_list).</li>
 <li>Use lower-case in URL segments, separating words with underscores <code>_</code> or hyphens <code>-</code>. Some servers ignore case so it's best to be clear.</li>
 <li>Use identifiers in your URLs instead of in the query-string. Using URL query-string parameters is fantastic for filtering, but not for resource names.</li>
 <li>Design for your clients, not for your data.</li>
@@ -785,6 +790,8 @@ specification, our Web APIs should return relevant HTTP status codes.</p>
 <tr>
 <th align="center">HTTP Verb</th>
 <th align="center">CRUD</th>
+<th align="center">Safe</th>
+<th align="center">Idempotent</th>
 <th>Entire Collection (e.g. /customers)</th>
 <th>Specific Item (e.g. /customes/{id})</th>
 </tr>
@@ -793,30 +800,40 @@ specification, our Web APIs should return relevant HTTP status codes.</p>
 <tr>
 <td align="center">POST</td>
 <td align="center">Create</td>
+<td align="center"></td>
+<td align="center"></td>
 <td>201 (Created), 'Location' header with link to /customers/{id} containing new ID.</td>
 <td>404 (Not Found), 409 (Conflict) if resource already exists.</td>
 </tr>
 <tr>
 <td align="center">GET</td>
 <td align="center">READ</td>
+<td align="center">Yes</td>
+<td align="center">Yes</td>
 <td>200 (OK), list of customers. Use pagination, sorting, and filtering to navigate big lists.</td>
 <td>200 (OK), single customer, 404 (Not Found), if ID not found or invalid.</td>
 </tr>
 <tr>
 <td align="center">PUT</td>
 <td align="center">Update/Replace</td>
+<td align="center"></td>
+<td align="center">Yes</td>
 <td>405 (Method Not Allowed)</td>
 <td>200 (OK) or 204 (No Content), 404 (Not Found), if ID not found or invalid.</td>
 </tr>
 <tr>
 <td align="center">PATCH</td>
 <td align="center">Update/Modify</td>
+<td align="center"></td>
+<td align="center"></td>
 <td>405 (Method Not Allowed)</td>
 <td>200 (OK) or 204 (No Content), 404 (Not Found), if ID not found or invalid.</td>
 </tr>
 <tr>
 <td align="center">DELETE</td>
 <td align="center">Delete</td>
+<td align="center"></td>
+<td align="center">Yes</td>
 <td>405 (Method Not Allowed)</td>
 <td>200 (OK), 404 (Not Found), if ID not found or invalid.</td>
 </tr>
@@ -836,9 +853,10 @@ specification, our Web APIs should return relevant HTTP status codes.</p>
 <h4 id="formats">Formats<a class="headerlink" href="#formats" title="Permanent link">&para;</a></h4>
 <p>All APIs should support JSON formats by default. Optionally support other formats, e.g. XML.</p>
 <p>Use HTTP Header to specify serialzation formats.</p>
-<pre><code>*Content-Type* defines the request format.
-*Accept* defines a list of acceptable response formats.
-</code></pre>
+<ul>
+<li><em>Content-Type</em> defines the request format.</li>
+<li><em>Accept</em> defines a list of acceptable response formats.</li>
+</ul>
 <h4 id="filtering-sorting-field-selection-pagination">Filtering, Sorting, Field Selection &amp; Pagination<a class="headerlink" href="#filtering-sorting-field-selection-pagination" title="Permanent link">&para;</a></h4>
 <p>When performing GET on a collection clients will need the ability to filter, sort, paginate, and/or limit fields in the results.</p>
 <p><strong>Filtering</strong></p>
@@ -870,13 +888,13 @@ and speed up the usage of the API.</p>
 
 <p>An API that requires sending a count can use a custom HTTP header like <code>X-Total-Count</code>.</p>
 <h4 id="versioning">Versioning<a class="headerlink" href="#versioning" title="Permanent link">&para;</a></h4>
-<p>Always version your API. Use <a href="http://semver.org/">Semantic Versioning</a> for defining versions.</p>
+<p>Always version your API. Use <a href="http://semver.org/">Semantic Versioning</a> <i class="fa fa-external-link"></i> for defining versions.</p>
 <p>The major version should be included in the URL.</p>
 <pre><code>/blog/api/v1
 </code></pre>
 
 <p>Use HTTP content type negotiation to expose minor verions. Leverage the versioned vnd content types.</p>
-<p>There is an <a href="https://tools.ietf.org/html/rfc6838#section-3.2">HTTP RFC 6838</a> for custom vendor-specific MIME types.
+<p>There is an <a href="https://tools.ietf.org/html/rfc6838#section-3.2">HTTP RFC 6838</a> <i class="fa fa-external-link"></i> for custom vendor-specific MIME types.
 It reserves a whole “vendor tree”, with free-form entries looking like type/vnd.producer’s name followed
 by media type name [+suffix]</p>
 <pre><code>application/vnd.crowbar.v2.3+json
@@ -886,19 +904,20 @@ by media type name [+suffix]</p>
 minor versions accounts for smaller changes (field deprecations, endpoint changes, etc).</p>
 <h4 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h4>
 <p>Always use SSL. No exceptions.</p>
-<p>Use <a href="https://oauth.net/2/">OAuth2</a> for authentication. The defacto industry standard for APIs.</p>
+<p>Use <a href="https://oauth.net/2/">OAuth2</a> <i class="fa fa-external-link"></i> for authentication. The defacto industry standard for APIs.</p>
 <h4 id="caching">Caching<a class="headerlink" href="#caching" title="Permanent link">&para;</a></h4>
 <p>HTTP provides a built-in caching framework! All you have to do is include some additional outbound
 response headers and do a little validation when you receive some inbound request headers.</p>
-<p>There are 2 approaches: <a href="http://en.wikipedia.org/wiki/HTTP_ETag">ETag</a> and <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.29">Last-Modified</a></p>
+<p>There are 2 approaches: <a href="http://en.wikipedia.org/wiki/HTTP_ETag">ETag</a> <i class="fa fa-external-link"></i> and <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.29">Last-Modified</a> <i class="fa fa-external-link"></i></p>
 <p><strong>ETag</strong>: When generating a response, include a HTTP header <code>ETag</code> containing a hash or checksum of the
 representation. This value should change whenever the output representation changes. Now, if an
 inbound HTTP requests contains a <code>If-None-Match</code> header with a matching ETag value, the API should
 return a <code>304 Not Modified</code> status code instead of the output representation of the resource.</p>
 <p><strong>Last-Modified</strong>: This basically works like to ETag, except that it uses timestamps. The response
-header <code>Last-Modified</code> contains a timestamp in <a href="http://www.ietf.org/rfc/rfc1123.txt">RFC 1123</a> format
+header <code>Last-Modified</code> contains a timestamp in <a href="http://www.ietf.org/rfc/rfc1123.txt">RFC 1123</a> <i class="fa fa-external-link"></i> format
 which is validated against <code>If-Modified-Since</code>. Note that the HTTP spec has had 3 different
 acceptable date formats and the server should be prepared to accept any one of them.</p>
+<p>For additional information check out <a href="https://www.mnot.net/cache_docs/">Caching Tutorial</a> <i class="fa fa-external-link"></i>.</p>
                 
                   
                 

@@ -44,7 +44,7 @@ Operations Example
 
 ### Basic Structure
 
-Three major parts of the [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) that
+Three major parts of the [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) :fa-external-link: that
 provide the overall definition of an API.
 
 

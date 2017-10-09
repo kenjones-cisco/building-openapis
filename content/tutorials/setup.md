@@ -7,7 +7,7 @@ stubs, API clients, and API documentation.
 
 
 !!! info
-    Prerequisite [**Docker Installation**](https://docs.docker.com/installation/)
+    Prerequisite [**Docker Installation**](https://docs.docker.com/installation/) :fa-external-link:
 
 
 ### Install codegen-cli
@@ -19,7 +19,7 @@ docker pull swaggerapi/swagger-codegen-cli
 ```
 
 
-If you plan to generate a Server or Client in Golang, you will want to download [go-swagger](https://goswagger.io/) as well.
+If you plan to generate a Server or Client in Golang, you will want to download [go-swagger](https://goswagger.io/) :fa-external-link: as well.
 
 ```bash
 docker pull quay.io/goswagger/swagger

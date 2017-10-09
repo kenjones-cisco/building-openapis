@@ -4,7 +4,11 @@ Representational State Transfer (REST) architectural style for distributed hyper
 describing the software engineering principles guiding REST and the interaction constraints chosen
 to retain those principles.
 
-Credit: [REST Source](http://www.restapitutorial.com/)
+Credit:
+
+- [REST Source](http://www.restapitutorial.com/) :fa-external-link:
+- [What are RESTful Web Services?](http://www.kennethlange.com/posts/What-are-RESTful-Web-Services.html) :fa-external-link:
+
 
 The constraints of REST.
 

@@ -2,10 +2,13 @@
 
 Credit:
 
-- [A RESTful Tutorial](http://www.restapitutorial.com/)
-- [10 Best Practices for Better RESTful API](https://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/)
-- [Best Practices for Designing a Pragmatic RESTful API](http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
-- [Best Practice: API Versioning for HTTP REST Interfaces](https://www.suse.com/communities/blog/best-practice-api-versioning-http-rest-interfaces/)
+- [A RESTful Tutorial](http://www.restapitutorial.com/) :fa-external-link:
+- [Rest Cookbook](http://restcookbook.com/) :fa-external-link:
+- [The Ultimate Checklist for REST APIs](http://www.kennethlange.com/posts/The-Ultimate-Checklist-for-REST-APIs.html) :fa-external-link:
+- [7 Tips for Designing a Better REST API](http://www.kennethlange.com/posts/7_tips_for_designing_a_better_rest_api.html) :fa-external-link:
+- [10 Best Practices for Better RESTful API](https://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/) :fa-external-link:
+- [Best Practices for Designing a Pragmatic RESTful API](http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api) :fa-external-link:
+- [Best Practice: API Versioning for HTTP REST Interfaces](https://www.suse.com/communities/blog/best-practice-api-versioning-http-rest-interfaces/) :fa-external-link:
 
 
 #### Resources
@@ -16,7 +19,7 @@ resources is the art part. Having sensible resource names (which are just URL pa
 
 - Resource names should be **nouns**; avoid **verbs** as resource names.
 - Use **plurals** in URL segments to keep your API URIs consistent across all HTTP methods, using the collection metaphor.
-- Avoid using collection verbiage in URLs. For example 'customer_list' as a resource. Use pluralization to indicate the collection metaphor (e.g. customers vs. customer_list).
+- Avoid using collection verbiage in URLs. For example do **not** use 'customer_list' as a resource. Use pluralization, **customers** to indicate the collection metaphor (e.g. customers vs. customer_list).
 - Use lower-case in URL segments, separating words with underscores `_` or hyphens `-`. Some servers ignore case so it's best to be clear.
 - Use identifiers in your URLs instead of in the query-string. Using URL query-string parameters is fantastic for filtering, but not for resource names.
 - Design for your clients, not for your data.
@@ -50,13 +53,13 @@ Most common HTTP Response Status Codes
 
 Methods on resources should be defined using standard HTTP verbs
 
-| HTTP Verb | CRUD | Entire Collection (e.g. /customers) | Specific Item (e.g. /customes/{id}) |
-| :---: | :---: | --- | --- |
-| POST | Create | 201 (Created), 'Location' header with link to /customers/{id} containing new ID. | 404 (Not Found), 409 (Conflict) if resource already exists. |
-| GET | READ | 200 (OK), list of customers. Use pagination, sorting, and filtering to navigate big lists. | 200 (OK), single customer, 404 (Not Found), if ID not found or invalid. |
-| PUT | Update/Replace | 405 (Method Not Allowed) | 200 (OK) or 204 (No Content), 404 (Not Found), if ID not found or invalid. |
-| PATCH | Update/Modify | 405 (Method Not Allowed) | 200 (OK) or 204 (No Content), 404 (Not Found), if ID not found or invalid. |
-| DELETE | Delete | 405 (Method Not Allowed) | 200 (OK), 404 (Not Found), if ID not found or invalid. |
+| HTTP Verb | CRUD | Safe | Idempotent | Entire Collection (e.g. /customers) | Specific Item (e.g. /customes/{id}) |
+| :---: | :---: | :---: | :---: | --- | --- |
+| POST | Create | | | 201 (Created), 'Location' header with link to /customers/{id} containing new ID. | 404 (Not Found), 409 (Conflict) if resource already exists. |
+| GET | READ | Yes | Yes | 200 (OK), list of customers. Use pagination, sorting, and filtering to navigate big lists. | 200 (OK), single customer, 404 (Not Found), if ID not found or invalid. |
+| PUT | Update/Replace | | Yes | 405 (Method Not Allowed) | 200 (OK) or 204 (No Content), 404 (Not Found), if ID not found or invalid. |
+| PATCH | Update/Modify | | | 405 (Method Not Allowed) | 200 (OK) or 204 (No Content), 404 (Not Found), if ID not found or invalid. |
+| DELETE | Delete | | Yes | 405 (Method Not Allowed) | 200 (OK), 404 (Not Found), if ID not found or invalid. |
 
 !!! note
     GET requests must not change any underlying resource data.
@@ -78,8 +81,8 @@ All APIs should support JSON formats by default. Optionally support other format
 
 Use HTTP Header to specify serialzation formats.
 
-    *Content-Type* defines the request format.
-    *Accept* defines a list of acceptable response formats.
+- *Content-Type* defines the request format.
+- *Accept* defines a list of acceptable response formats.
 
 
 #### Filtering, Sorting, Field Selection & Pagination
@@ -135,7 +138,7 @@ An API that requires sending a count can use a custom HTTP header like `X-Total-
 
 #### Versioning
 
-Always version your API. Use [Semantic Versioning](http://semver.org/) for defining versions.
+Always version your API. Use [Semantic Versioning](http://semver.org/) :fa-external-link: for defining versions.
 
 The major version should be included in the URL.
 
@@ -145,7 +148,7 @@ The major version should be included in the URL.
 
 Use HTTP content type negotiation to expose minor verions. Leverage the versioned vnd content types.
 
-There is an [HTTP RFC 6838](https://tools.ietf.org/html/rfc6838#section-3.2) for custom vendor-specific MIME types.
+There is an [HTTP RFC 6838](https://tools.ietf.org/html/rfc6838#section-3.2) :fa-external-link: for custom vendor-specific MIME types.
 It reserves a whole “vendor tree”, with free-form entries looking like type/vnd.producer’s name followed
 by media type name [+suffix]
 
@@ -163,7 +166,7 @@ minor versions accounts for smaller changes (field deprecations, endpoint change
 
 Always use SSL. No exceptions.
 
-Use [OAuth2](https://oauth.net/2/) for authentication. The defacto industry standard for APIs.
+Use [OAuth2](https://oauth.net/2/) :fa-external-link: for authentication. The defacto industry standard for APIs.
 
 
 #### Caching
@@ -171,7 +174,7 @@ Use [OAuth2](https://oauth.net/2/) for authentication. The defacto industry stan
 HTTP provides a built-in caching framework! All you have to do is include some additional outbound
 response headers and do a little validation when you receive some inbound request headers.
 
-There are 2 approaches: [ETag](http://en.wikipedia.org/wiki/HTTP_ETag) and [Last-Modified](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.29)
+There are 2 approaches: [ETag](http://en.wikipedia.org/wiki/HTTP_ETag) :fa-external-link: and [Last-Modified](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.29) :fa-external-link:
 
 **ETag**: When generating a response, include a HTTP header `ETag` containing a hash or checksum of the
 representation. This value should change whenever the output representation changes. Now, if an
@@ -179,6 +182,8 @@ inbound HTTP requests contains a `If-None-Match` header with a matching ETag val
 return a `304 Not Modified` status code instead of the output representation of the resource.
 
 **Last-Modified**: This basically works like to ETag, except that it uses timestamps. The response
-header `Last-Modified` contains a timestamp in [RFC 1123](http://www.ietf.org/rfc/rfc1123.txt) format
+header `Last-Modified` contains a timestamp in [RFC 1123](http://www.ietf.org/rfc/rfc1123.txt) :fa-external-link: format
 which is validated against `If-Modified-Since`. Note that the HTTP spec has had 3 different
 acceptable date formats and the server should be prepared to accept any one of them.
+
+For additional information check out [Caching Tutorial](https://www.mnot.net/cache_docs/) :fa-external-link:.

@@ -4,7 +4,7 @@ SHELL := /bin/bash
 .DEFAULT_GOAL := build
 
 # Variables
-PROJECT = yaml
+PROJECT = building-openapis
 
 # Windows environment?
 CYG_CHECK := $(shell hash cygpath 2>/dev/null && echo 1)
