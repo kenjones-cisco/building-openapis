@@ -18,7 +18,7 @@
     
     
       
-        <title>Setup - Building OpenAPIs</title>
+        <title>API Security - Building OpenAPIs</title>
       
     
     
@@ -84,7 +84,7 @@
                 </span>
               
             
-            Setup
+            API Security
           
         </span>
       </div>
@@ -344,77 +344,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Setup
-      </label>
-    
-    <a href="./" title="Setup" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../setup/" title="Setup" class="md-nav__link">
       Setup
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#environment-setup" title="Environment Setup" class="md-nav__link">
-    Environment Setup
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#summary" title="Summary" class="md-nav__link">
-    Summary
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-codegen-cli" title="Install codegen-cli" class="md-nav__link">
-    Install codegen-cli
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-documentation-tools" title="Install Documentation Tool(s)" class="md-nav__link">
-    Install Documentation Tool(s)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#copy-example-api-definition" title="Copy Example API Definition" class="md-nav__link">
-    Copy Example API Definition
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -566,11 +500,138 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../security/" title="API Security" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        API Security
+      </label>
+    
+    <a href="./" title="API Security" class="md-nav__link md-nav__link--active">
       API Security
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enabling-api-security" title="Enabling API Security" class="md-nav__link">
+    Enabling API Security
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modify-api-definition" title="Modify API Definition" class="md-nav__link">
+    Modify API Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-implementation" title="Java Implementation" class="md-nav__link">
+    Java Implementation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate-api-definition" title="Validate API Definition" class="md-nav__link">
+    Validate API Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-server" title="Generate Server" class="md-nav__link">
+    Generate Server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-client" title="Generate Client" class="md-nav__link">
+    Generate Client
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#golang-implementation" title="Golang Implementation" class="md-nav__link">
+    Golang Implementation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate-api-definition_1" title="Validate API Definition" class="md-nav__link">
+    Validate API Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-server_1" title="Generate Server" class="md-nav__link">
+    Generate Server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-client_1" title="Generate Client" class="md-nav__link">
+    Generate Client
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-information" title="Additional information" class="md-nav__link">
+    Additional information
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -610,8 +671,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#environment-setup" title="Environment Setup" class="md-nav__link">
-    Environment Setup
+  <a href="#enabling-api-security" title="Enabling API Security" class="md-nav__link">
+    Enabling API Security
   </a>
   
     <nav class="md-nav">
@@ -625,22 +686,83 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-codegen-cli" title="Install codegen-cli" class="md-nav__link">
-    Install codegen-cli
+  <a href="#modify-api-definition" title="Modify API Definition" class="md-nav__link">
+    Modify API Definition
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-documentation-tools" title="Install Documentation Tool(s)" class="md-nav__link">
-    Install Documentation Tool(s)
+  <a href="#java-implementation" title="Java Implementation" class="md-nav__link">
+    Java Implementation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate-api-definition" title="Validate API Definition" class="md-nav__link">
+    Validate API Definition
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#copy-example-api-definition" title="Copy Example API Definition" class="md-nav__link">
-    Copy Example API Definition
+  <a href="#generate-server" title="Generate Server" class="md-nav__link">
+    Generate Server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-client" title="Generate Client" class="md-nav__link">
+    Generate Client
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#golang-implementation" title="Golang Implementation" class="md-nav__link">
+    Golang Implementation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate-api-definition_1" title="Validate API Definition" class="md-nav__link">
+    Validate API Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-server_1" title="Generate Server" class="md-nav__link">
+    Generate Server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-client_1" title="Generate Client" class="md-nav__link">
+    Generate Client
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-information" title="Additional information" class="md-nav__link">
+    Additional information
   </a>
   
 </li>
@@ -665,49 +787,54 @@
               
                 
                 
-                  <h1>Setup</h1>
+                  <h1>API Security</h1>
                 
-                <h2 id="environment-setup">Environment Setup<a class="headerlink" href="#environment-setup" title="Permanent link">&para;</a></h2>
+                <h2 id="enabling-api-security">Enabling API Security<a class="headerlink" href="#enabling-api-security" title="Permanent link">&para;</a></h2>
 <h3 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h3>
-<p>This tutorial will explain how to setup your local environment to be able to generate API Server
-stubs, API clients, and API documentation.</p>
+<p>This tutorial will explain how to add security to an API.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>Prerequisite <a href="https://docs.docker.com/installation/"><strong>Docker Installation</strong></a> <i class="fa fa-external-link"></i></p>
+<p>Prerequisite <a href="../setup/"><strong>Environment Setup</strong></a></p>
 </div>
-<h3 id="install-codegen-cli">Install codegen-cli<a class="headerlink" href="#install-codegen-cli" title="Permanent link">&para;</a></h3>
-<p>To install the codegen-cli perform a docker pull.</p>
-<div class="codehilite"><pre><span></span>docker pull swaggerapi/swagger-codegen-cli
-</pre></div>
-
-
-<p>If you plan to generate a Server or Client in Golang, you will want to download <a href="https://goswagger.io/">go-swagger</a> <i class="fa fa-external-link"></i> as well.</p>
-<div class="codehilite"><pre><span></span>docker pull quay.io/goswagger/swagger
-</pre></div>
-
-
-<h3 id="install-documentation-tools">Install Documentation Tool(s)<a class="headerlink" href="#install-documentation-tools" title="Permanent link">&para;</a></h3>
-<p>Converting API definition to:</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <ul>
-<li>AsciiDoc</li>
-<li>GitHub Flavored Markdown</li>
-<li>Atlassian Confluence Wiki</li>
+<li><code>${PWD}</code> works on Linux, MacOS, and Windows (via Powershell)</li>
+<li><code>%cd%</code> works on Windows (via cmd)</li>
+<li><code>$(cygpath -m -a "$(pwd)")</code> works on Windows (via Cygwin)</li>
 </ul>
-<div class="codehilite"><pre><span></span>docker pull swagger2markup/swagger2markup
+</div>
+<h3 id="modify-api-definition">Modify API Definition<a class="headerlink" href="#modify-api-definition" title="Permanent link">&para;</a></h3>
+<p>Add the following details to your API definition.</p>
+<div class="codehilite"><pre><span></span><span class="c1"># enable SSL (encrypted connections) vis HTTPS</span>
+<span class="l l-Scalar l-Scalar-Plain">schemes</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">https</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">http</span>
+
+<span class="c1"># add OAuth2 security</span>
+<span class="l l-Scalar l-Scalar-Plain">securityDefinitions</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">token</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">oauth2</span>
+    <span class="l l-Scalar l-Scalar-Plain">tokenUrl</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://cloudsso.cisco.com/as/token.oauth2</span>
+    <span class="l l-Scalar l-Scalar-Plain">flow</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">password</span>
+    <span class="l l-Scalar l-Scalar-Plain">scopes</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">write:tasks</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">create and modify tasks</span>
+      <span class="l l-Scalar l-Scalar-Plain">read:task</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">read tasks</span>
+
+<span class="c1"># enable security for all read APIs</span>
+
+<span class="c1"># within the body of each GET operation</span>
+          <span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">token</span><span class="p p-Indicator">:</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">read:tasks</span>
+
+<span class="c1"># within the body of each POST/PUT/PATCH/DELETE operation</span>
+          <span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">token</span><span class="p p-Indicator">:</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">write:tasks</span>
 </pre></div>
 
 
-<p>Additional conversion from AsciiDoc to:</p>
-<ul>
-<li>HTML5</li>
-<li>PDF</li>
-<li>EPUB</li>
-</ul>
-<div class="codehilite"><pre><span></span>docker pull asciidoctor/docker-asciidoctor
-</pre></div>
-
-
-<h3 id="copy-example-api-definition">Copy Example API Definition<a class="headerlink" href="#copy-example-api-definition" title="Permanent link">&para;</a></h3>
 <p>Filename: <code>task-tracker-api.yaml</code></p>
 <div class="codehilite"><pre><span></span><span class="c1"># Original source</span>
 <span class="c1"># https://raw.githubusercontent.com/go-swagger/go-swagger/master/examples/task-tracker/swagger.yml</span>
@@ -718,8 +845,20 @@ stubs, API clients, and API documentation.</p>
         <span class="no">This application implements a very simple issue tracker.</span>
     <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&quot;1.0.0&quot;</span>
 
+<span class="c1"># enable SSL (encrypted connections) vis HTTPS</span>
 <span class="l l-Scalar l-Scalar-Plain">schemes</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">https</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">http</span>
+
+<span class="c1"># add OAuth2 security</span>
+<span class="l l-Scalar l-Scalar-Plain">securityDefinitions</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">token</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">oauth2</span>
+    <span class="l l-Scalar l-Scalar-Plain">tokenUrl</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">https://cloudsso.cisco.com/as/token.oauth2</span>
+    <span class="l l-Scalar l-Scalar-Plain">flow</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">password</span>
+    <span class="l l-Scalar l-Scalar-Plain">scopes</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">write:tasks</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">create and modify tasks</span>
+      <span class="l l-Scalar l-Scalar-Plain">read:tasks</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">read tasks</span>
 
 <span class="l l-Scalar l-Scalar-Plain">produces</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">application/json</span>
@@ -796,6 +935,9 @@ stubs, API clients, and API documentation.</p>
           <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Lists the tasks</span>
           <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
             <span class="no">List tasks.</span>
+          <span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">token</span><span class="p p-Indicator">:</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">read:tasks</span>
           <span class="l l-Scalar l-Scalar-Plain">responses</span><span class="p p-Indicator">:</span>
             <span class="l l-Scalar l-Scalar-Plain">200</span><span class="p p-Indicator">:</span>
               <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Successful response</span>
@@ -809,6 +951,9 @@ stubs, API clients, and API documentation.</p>
           <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Creates a &#39;Task&#39; object.</span>
           <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
             <span class="no">Allows for creating a task.</span>
+          <span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">token</span><span class="p p-Indicator">:</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">write:tasks</span>
           <span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
             <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">body</span>
               <span class="l l-Scalar l-Scalar-Plain">in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">body</span>
@@ -833,6 +978,9 @@ stubs, API clients, and API documentation.</p>
           <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Gets the details for a task.</span>
           <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
             <span class="no">The details view of a task.</span>
+          <span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">token</span><span class="p p-Indicator">:</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">read:tasks</span>
           <span class="l l-Scalar l-Scalar-Plain">responses</span><span class="p p-Indicator">:</span>
             <span class="l l-Scalar l-Scalar-Plain">200</span><span class="p p-Indicator">:</span>
               <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Task details</span>
@@ -843,6 +991,9 @@ stubs, API clients, and API documentation.</p>
           <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Updates the details for a task.</span>
           <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
             <span class="no">Allows for updating a task.</span>
+          <span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">token</span><span class="p p-Indicator">:</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">write:tasks</span>
           <span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
             <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">body</span>
               <span class="l l-Scalar l-Scalar-Plain">in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">body</span>
@@ -855,6 +1006,188 @@ stubs, API clients, and API documentation.</p>
               <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Task details</span>
               <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
                 <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Task&#39;</span>
+</pre></div>
+
+
+<h3 id="java-implementation">Java Implementation<a class="headerlink" href="#java-implementation" title="Permanent link">&para;</a></h3>
+<h4 id="validate-api-definition">Validate API Definition<a class="headerlink" href="#validate-api-definition" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span>docker run --rm -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/local -w /local swaggerapi/swagger-codegen-cli validate <span class="se">\</span>
+    -i task-tracker-api.yaml
+</pre></div>
+
+
+<h4 id="generate-server">Generate Server<a class="headerlink" href="#generate-server" title="Permanent link">&para;</a></h4>
+<p>Filename: <code>codegen_config.json</code></p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;artifactId&quot;</span><span class="p">:</span> <span class="s2">&quot;tracker&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;groupId&quot;</span><span class="p">:</span> <span class="s2">&quot;com.cisco.tracker&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;basePackage&quot;</span><span class="p">:</span> <span class="s2">&quot;com.cisco.tracker&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;apiPackage&quot;</span><span class="p">:</span> <span class="s2">&quot;com.cisco.tracker.api&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;configPackage&quot;</span><span class="p">:</span> <span class="s2">&quot;com.cisco.tracker.config&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;modelPackage&quot;</span><span class="p">:</span> <span class="s2">&quot;com.cisco.tracker.model&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;hideGenerationTimestamp&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;dateLibrary&quot;</span><span class="p">:</span> <span class="s2">&quot;java8&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;useBeanValidation&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;licenseUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>docker run --rm -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/local -w /local swaggerapi/swagger-codegen-cli generate <span class="se">\</span>
+    -i task-tracker-api.yaml <span class="se">\</span>
+    --lang spring <span class="se">\</span>
+    -c codegen_config.json
+</pre></div>
+
+
+<p>The Output and Files will be the same as previously generated except that within the file <code>TasksApi.java</code>
+there will now be additional annotation indicating that Authorization is now required.</p>
+<div class="codehilite"><pre><span></span>    <span class="nd">@ApiOperation</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;Creates a &#39;Task&#39; object.&quot;</span><span class="o">,</span> <span class="n">notes</span> <span class="o">=</span> <span class="s">&quot;Allows for creating a task. &quot;</span><span class="o">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">Void</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">authorizations</span> <span class="o">=</span> <span class="o">{</span>
+        <span class="nd">@Authorization</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;token&quot;</span><span class="o">,</span> <span class="n">scopes</span> <span class="o">=</span> <span class="o">{</span>
+            <span class="nd">@AuthorizationScope</span><span class="o">(</span><span class="n">scope</span> <span class="o">=</span> <span class="s">&quot;write:tasks&quot;</span><span class="o">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s">&quot;create and modify tasks&quot;</span><span class="o">)</span>
+            <span class="o">})</span>
+    <span class="o">},</span> <span class="n">tags</span><span class="o">={</span>  <span class="o">})</span>
+    <span class="nd">@ApiResponses</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="o">{</span>
+        <span class="nd">@ApiResponse</span><span class="o">(</span><span class="n">code</span> <span class="o">=</span> <span class="mi">201</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">&quot;Task created&quot;</span><span class="o">)</span> <span class="o">})</span>
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/tasks&quot;</span><span class="o">,</span>
+        <span class="n">produces</span> <span class="o">=</span> <span class="o">{</span> <span class="s">&quot;application/json&quot;</span> <span class="o">},</span>
+        <span class="n">consumes</span> <span class="o">=</span> <span class="o">{</span> <span class="s">&quot;application/json&quot;</span> <span class="o">},</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">)</span>
+
+    <span class="nd">@ApiOperation</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;Lists the tasks&quot;</span><span class="o">,</span> <span class="n">notes</span> <span class="o">=</span> <span class="s">&quot;List tasks. &quot;</span><span class="o">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">Task</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">responseContainer</span> <span class="o">=</span> <span class="s">&quot;List&quot;</span><span class="o">,</span> <span class="n">authorizations</span> <span class="o">=</span> <span class="o">{</span>
+        <span class="nd">@Authorization</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;token&quot;</span><span class="o">,</span> <span class="n">scopes</span> <span class="o">=</span> <span class="o">{</span>
+            <span class="nd">@AuthorizationScope</span><span class="o">(</span><span class="n">scope</span> <span class="o">=</span> <span class="s">&quot;read:tasks&quot;</span><span class="o">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s">&quot;read tasks&quot;</span><span class="o">)</span>
+            <span class="o">})</span>
+    <span class="o">},</span> <span class="n">tags</span><span class="o">={</span>  <span class="o">})</span>
+    <span class="nd">@ApiResponses</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="o">{</span>
+        <span class="nd">@ApiResponse</span><span class="o">(</span><span class="n">code</span> <span class="o">=</span> <span class="mi">200</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">&quot;Successful response&quot;</span><span class="o">,</span> <span class="n">response</span> <span class="o">=</span> <span class="n">Task</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">responseContainer</span> <span class="o">=</span> <span class="s">&quot;List&quot;</span><span class="o">)</span> <span class="o">})</span>
+    <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">&quot;/tasks&quot;</span><span class="o">,</span>
+        <span class="n">produces</span> <span class="o">=</span> <span class="o">{</span> <span class="s">&quot;application/json&quot;</span> <span class="o">},</span>
+        <span class="n">consumes</span> <span class="o">=</span> <span class="o">{</span> <span class="s">&quot;application/json&quot;</span> <span class="o">},</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="n">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">)</span>
+</pre></div>
+
+
+<h4 id="generate-client">Generate Client<a class="headerlink" href="#generate-client" title="Permanent link">&para;</a></h4>
+<p>Filename: <code>codegen_config.json</code></p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;artifactId&quot;</span><span class="p">:</span> <span class="s2">&quot;tracker&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;groupId&quot;</span><span class="p">:</span> <span class="s2">&quot;com.cisco.tracker&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;basePackage&quot;</span><span class="p">:</span> <span class="s2">&quot;com.cisco.tracker&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;apiPackage&quot;</span><span class="p">:</span> <span class="s2">&quot;com.cisco.tracker.api&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;configPackage&quot;</span><span class="p">:</span> <span class="s2">&quot;com.cisco.tracker.config&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;modelPackage&quot;</span><span class="p">:</span> <span class="s2">&quot;com.cisco.tracker.model&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;hideGenerationTimestamp&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;dateLibrary&quot;</span><span class="p">:</span> <span class="s2">&quot;java8&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;useBeanValidation&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;licenseUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>docker run --rm -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/local -w /local swaggerapi/swagger-codegen-cli generate <span class="se">\</span>
+    -i task-tracker-api.yaml <span class="se">\</span>
+    --lang java <span class="se">\</span>
+    -c codegen_config.json
+</pre></div>
+
+
+<p>The Output and Files will be the same as previously generated except that within the file <code>ApiClient.java</code>
+there will now be configuration for the authentications.</p>
+<div class="codehilite"><pre><span></span>    <span class="kd">public</span> <span class="nf">ApiClient</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">httpClient</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OkHttpClient</span><span class="o">();</span>
+
+
+        <span class="n">verifyingSsl</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+
+        <span class="n">json</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSON</span><span class="o">();</span>
+
+        <span class="c1">// Set default User-Agent.</span>
+        <span class="n">setUserAgent</span><span class="o">(</span><span class="s">&quot;Swagger-Codegen/1.0.0/java&quot;</span><span class="o">);</span>
+
+        <span class="c1">// Setup authentications (key: authentication name, value: authentication).</span>
+        <span class="n">authentications</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Authentication</span><span class="o">&gt;();</span>
+        <span class="n">authentications</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;token&quot;</span><span class="o">,</span> <span class="k">new</span> <span class="n">OAuth</span><span class="o">());</span>
+        <span class="c1">// Prevent the authentications from being modified.</span>
+        <span class="n">authentications</span> <span class="o">=</span> <span class="n">Collections</span><span class="o">.</span><span class="na">unmodifiableMap</span><span class="o">(</span><span class="n">authentications</span><span class="o">);</span>
+    <span class="o">}</span>
+</pre></div>
+
+
+<h3 id="golang-implementation">Golang Implementation<a class="headerlink" href="#golang-implementation" title="Permanent link">&para;</a></h3>
+<p>Update the GOPATH environment variable within the container by appending the base directory; e.g. <code>/tracker</code>.
+Mount the project root directory to base directory <code>/tracker/src/&lt;import path&gt;</code> where the <code>&lt;import path&gt;</code>
+is how you import a golang package.</p>
+<h4 id="validate-api-definition_1">Validate API Definition<a class="headerlink" href="#validate-api-definition_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span>docker run --rm -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/local -w /local quay.io/goswagger/swagger validate task-tracker-api.yaml
+</pre></div>
+
+
+<h4 id="generate-server_1">Generate Server<a class="headerlink" href="#generate-server_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span>docker run --rm <span class="se">\</span>
+    -e <span class="nv">GOPATH</span><span class="o">=</span><span class="s1">&#39;/go:/tracker&#39;</span> <span class="se">\</span>
+    -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/tracker/src/gitscm.cisco.com/myorg/go-trackerclient <span class="se">\</span>
+    -w /tracker/src/gitscm.cisco.com/myorg/go-trackerclient <span class="se">\</span>
+    quay.io/goswagger/swagger generate server <span class="se">\</span>
+        -A TrackerApi <span class="se">\</span>
+        -f task-tracker-api.yaml <span class="se">\</span>
+        --principal models.User
+</pre></div>
+
+
+<p>The Output and Files will be the same as previously generated except that within the file <code>configure_tracker.go</code>
+there will now be additional configuration indicating that token authenication is now required.</p>
+<div class="codehilite"><pre><span></span>  <span class="nx">api</span><span class="p">.</span><span class="nx">TokenAuth</span> <span class="p">=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">token</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">scopes</span> <span class="p">[]</span><span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">models</span><span class="p">.</span><span class="nx">User</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">errors</span><span class="p">.</span><span class="nx">NotImplemented</span><span class="p">(</span><span class="s">&quot;oauth2 bearer auth (token) has not yet been implemented&quot;</span><span class="p">)</span>
+  <span class="p">}</span>
+</pre></div>
+
+
+<h4 id="generate-client_1">Generate Client<a class="headerlink" href="#generate-client_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span>docker run --rm <span class="se">\</span>
+    -e <span class="nv">GOPATH</span><span class="o">=</span><span class="s1">&#39;/go:/tracker&#39;</span> <span class="se">\</span>
+    -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/tracker/src/gitscm.cisco.com/myorg/go-trackerclient <span class="se">\</span>
+    -w /tracker/src/gitscm.cisco.com/myorg/go-trackerclient <span class="se">\</span>
+    quay.io/goswagger/swagger generate client <span class="se">\</span>
+        -A TrackerApi <span class="se">\</span>
+        -f task-tracker-api.yaml <span class="se">\</span>
+        --principal models.User
+</pre></div>
+
+
+<p>The Output and Files will be the same as previously generated except that within the file <code>operations_client.go</code>
+there will now be additional parameter for each operation indicating that token authenication is now required.</p>
+<div class="codehilite"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="nx">Client</span><span class="p">)</span> <span class="nx">CreateTask</span><span class="p">(</span><span class="nx">params</span> <span class="o">*</span><span class="nx">CreateTaskParams</span><span class="p">,</span> <span class="nx">authInfo</span> <span class="nx">runtime</span><span class="p">.</span><span class="nx">ClientAuthInfoWriter</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">CreateTaskCreated</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="additional-information">Additional information<a class="headerlink" href="#additional-information" title="Permanent link">&para;</a></h3>
+<p>If the security configuration for each operation is identical, then the <code>security</code> can be defined globally within
+the API definition.</p>
+<div class="codehilite"><pre><span></span><span class="c1"># Adds security for all API operations</span>
+<span class="l l-Scalar l-Scalar-Plain">security</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">token</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
+</pre></div>
+
+
+<p>If an operation does not require security, then <code>security</code> must be defined for each individual operation
+and the operation(s) that should be unprotected (requires no authentication) should not have <code>security</code>
+defined within the operation.</p>
+<div class="codehilite"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">paths</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">/tasks</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">get</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">operationId</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">listTasks</span>
+          <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Lists the tasks</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+            <span class="no">List tasks.</span>
+          <span class="l l-Scalar l-Scalar-Plain">responses</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">200</span><span class="p p-Indicator">:</span>
+              <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Successful response</span>
+              <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">TaskList</span>
+                <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">array</span>
+                <span class="l l-Scalar l-Scalar-Plain">items</span><span class="p p-Indicator">:</span>
+                  <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Task&#39;</span>
 </pre></div>
                 
                   
@@ -874,7 +1207,7 @@ stubs, API clients, and API documentation.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../../best-practices/implementation/" title="API Implementation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../documentation/" title="Generating Documentation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -883,19 +1216,19 @@ stubs, API clients, and API documentation.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                API Implementation
+                Generating Documentation
               </span>
             </div>
           </a>
         
         
-          <a href="../server_golang/" title="Golang API Server" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../license/" title="License" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Golang API Server
+                License
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

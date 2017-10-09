@@ -568,6 +568,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/security/" title="API Security" class="md-nav__link">
+      API Security
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -679,7 +691,7 @@ part of a response.</p>
 <li>What operation(s) will clients be able to perform on the resource(s)?</li>
 </ol>
 <p>Resources Example</p>
-<pre><code>Task
+<div class="codehilite"><pre><span></span>Task
     - id (uuid string): Unique identifier
     - title (string): Title of task
     - description (string): Detailed description of the task
@@ -692,7 +704,8 @@ part of a response.</p>
 User
     - id (uuid string): Unique identifier
     - screenName (string): Name of user
-</code></pre>
+</pre></div>
+
 
 <p>Operations Example</p>
 <ul>
@@ -707,159 +720,161 @@ provide the overall definition of an API.</p>
 <h4 id="info">info<a class="headerlink" href="#info" title="Permanent link">&para;</a></h4>
 <p>The <code>info</code> part of the specification represents the API Metadata.</p>
 <p>Example</p>
-<pre><code class="yaml">swagger: 2.0
-info:
-    title: Issue Tracker
-    description: |
-        This application implements a very simple issue tracker.
-    version: 1.0.0
+<div class="codehilite"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">swagger</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2.0</span>
+<span class="l l-Scalar l-Scalar-Plain">info</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Issue Tracker</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+        <span class="no">This application implements a very simple issue tracker.</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1.0.0</span>
 
-schemes:
-  - http
+<span class="l l-Scalar l-Scalar-Plain">schemes</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">http</span>
 
-produces:
-  - application/json
-consumes:
-  - application/json
+<span class="l l-Scalar l-Scalar-Plain">produces</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">application/json</span>
+<span class="l l-Scalar l-Scalar-Plain">consumes</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">application/json</span>
 
-# API versioning (Major Version)
-basePath: /v1
-</code></pre>
+<span class="c1"># API versioning (Major Version)</span>
+<span class="l l-Scalar l-Scalar-Plain">basePath</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/v1</span>
+</pre></div>
+
 
 <h4 id="definitions">definitions<a class="headerlink" href="#definitions" title="Permanent link">&para;</a></h4>
 <p>The <code>definitions</code> part of the specification represents the API Resource(s).</p>
 <p>Example</p>
-<pre><code class="yaml">definitions:
-    Task:
-        title: Task
-        description: &gt;
-          Task is the main entity in this application. Everything revolves around
-          tasks and managing them.
-        type: object
-        properties:
-          id:
-            title: The id of the task.
-            description: &gt;-
-              A unique identifier for the task. These are created in ascending order.
-            type: string
-            format: uuid
-          title:
-            title: The title of the task.
-            description: |
-              The title for a task.
-            type: string
-          description:
-            title: The description of the task.
-            description: &gt;
-              The task description is a longer, more detailed description of the issue.
-            type: string
-          severity:
-            type: integer
-            format: int32
-          effort:
-            description: the level of effort required to get this task completed
-            type: integer
-            format: int32
-          status:
-            title: the status of the issue
-            description: |
-              the status of the issue
-            type: string
-          assignedTo:
-            $ref: '#/definitions/User'
-          reportedBy:
-            $ref: '#/definitions/User'
+<div class="codehilite"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">definitions</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">Task</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Task</span>
+        <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">&gt;</span>
+          <span class="no">Task is the main entity in this application. Everything revolves around</span>
+          <span class="no">tasks and managing them.</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
+        <span class="l l-Scalar l-Scalar-Plain">properties</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">The id of the task.</span>
+            <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">&gt;-</span>
+              <span class="no">A unique identifier for the task. These are created in ascending order.</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+            <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uuid</span>
+          <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">The title of the task.</span>
+            <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+              <span class="no">The title for a task.</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">The description of the task.</span>
+            <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">&gt;</span>
+              <span class="no">The task description is a longer, more detailed description of the issue.</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+          <span class="l l-Scalar l-Scalar-Plain">severity</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">integer</span>
+            <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">int32</span>
+          <span class="l l-Scalar l-Scalar-Plain">effort</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">the level of effort required to get this task completed</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">integer</span>
+            <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">int32</span>
+          <span class="l l-Scalar l-Scalar-Plain">status</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">the status of the issue</span>
+            <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+              <span class="no">the status of the issue</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+          <span class="l l-Scalar l-Scalar-Plain">assignedTo</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/User&#39;</span>
+          <span class="l l-Scalar l-Scalar-Plain">reportedBy</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/User&#39;</span>
 
-    User:
-        title: User
-        description: &gt;
-          This representation of a user is mainly meant for inclusion in other
-          models, or for list views.
-        type: object
-        properties:
-          id:
-            title: A unique identifier for a user.
-            description: &gt;
-              This id is automatically generated on the server when a user is created.
-            type: string
-            format: uuid
-          screenName:
-            title: The screen name for the user.
-            description: |
-              This is used for vanity type urls as well as login credentials.
-            type: string
-</code></pre>
+    <span class="l l-Scalar l-Scalar-Plain">User</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">User</span>
+        <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">&gt;</span>
+          <span class="no">This representation of a user is mainly meant for inclusion in other</span>
+          <span class="no">models, or for list views.</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
+        <span class="l l-Scalar l-Scalar-Plain">properties</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">A unique identifier for a user.</span>
+            <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">&gt;</span>
+              <span class="no">This id is automatically generated on the server when a user is created.</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+            <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uuid</span>
+          <span class="l l-Scalar l-Scalar-Plain">screenName</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">The screen name for the user.</span>
+            <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+              <span class="no">This is used for vanity type urls as well as login credentials.</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+</pre></div>
+
 
 <h4 id="paths">paths<a class="headerlink" href="#paths" title="Permanent link">&para;</a></h4>
 <p>The <code>paths</code> part of the specification represents the API Operation(s).</p>
 <p>Example</p>
-<pre><code class="yaml">paths:
-    /tasks:
-        get:
-          operationId: listTasks
-          summary: Lists the tasks
-          description: |
-            List tasks.
-          responses:
-            200:
-              description: Successful response
-              schema:
-                title: TaskList
-                type: array
-                items:
-                  $ref: '#/definitions/Task'
-        post:
-          operationId: createTask
-          summary: Creates a 'Task' object.
-          description: |
-            Allows for creating a task.
-          parameters:
-            - name: body
-              in: body
-              description: The task to create
-              required: true
-              schema:
-                $ref: '#/definitions/Task'
-          responses:
-            201:
-              description: Task created
+<div class="codehilite"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">paths</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">/tasks</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">get</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">operationId</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">listTasks</span>
+          <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Lists the tasks</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+            <span class="no">List tasks.</span>
+          <span class="l l-Scalar l-Scalar-Plain">responses</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">200</span><span class="p p-Indicator">:</span>
+              <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Successful response</span>
+              <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">TaskList</span>
+                <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">array</span>
+                <span class="l l-Scalar l-Scalar-Plain">items</span><span class="p p-Indicator">:</span>
+                  <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Task&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">post</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">operationId</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">createTask</span>
+          <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Creates a &#39;Task&#39; object.</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+            <span class="no">Allows for creating a task.</span>
+          <span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">body</span>
+              <span class="l l-Scalar l-Scalar-Plain">in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">body</span>
+              <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">The task to create</span>
+              <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+              <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Task&#39;</span>
+          <span class="l l-Scalar l-Scalar-Plain">responses</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">201</span><span class="p p-Indicator">:</span>
+              <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Task created</span>
 
-    /tasks/{id}:
-        get:
-          operationId: viewTask
-          summary: Gets the details for a task.
-          description: |
-            The details view of a task.
-          parameters:
-            - in: path
-              name: id
-              description: The id of the task
-              type: string
-              format: uuid
-              required: true
-          responses:
-            200:
-              description: Task details
-              schema:
-                $ref: '#/definitions/Task'
-        put:
-          operationId: updateTask
-          summary: Updates the details for a task.
-          description: |
-            Allows for updating a task.
-          parameters:
-            - name: body
-              in: body
-              description: The task to update
-              required: true
-              schema:
-                $ref: '#/definitions/Task'
-          responses:
-            200:
-              description: Task details
-              schema:
-                $ref: '#/definitions/Task'
-</code></pre>
+    <span class="l l-Scalar l-Scalar-Plain">/tasks/{id}</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">get</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">operationId</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">viewTask</span>
+          <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Gets the details for a task.</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+            <span class="no">The details view of a task.</span>
+          <span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">path</span>
+              <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">id</span>
+              <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">The id of the task</span>
+              <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+              <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uuid</span>
+              <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+          <span class="l l-Scalar l-Scalar-Plain">responses</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">200</span><span class="p p-Indicator">:</span>
+              <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Task details</span>
+              <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Task&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">put</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">operationId</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">updateTask</span>
+          <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Updates the details for a task.</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+            <span class="no">Allows for updating a task.</span>
+          <span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">body</span>
+              <span class="l l-Scalar l-Scalar-Plain">in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">body</span>
+              <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">The task to update</span>
+              <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+              <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Task&#39;</span>
+          <span class="l l-Scalar l-Scalar-Plain">responses</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">200</span><span class="p p-Indicator">:</span>
+              <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Task details</span>
+              <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Task&#39;</span>
+</pre></div>
                 
                   
                 

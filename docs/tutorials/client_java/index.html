@@ -561,6 +561,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" title="API Security" class="md-nav__link">
+      API Security
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -663,34 +675,37 @@
 </ul>
 </div>
 <h3 id="validate-api-definition">Validate API Definition<a class="headerlink" href="#validate-api-definition" title="Permanent link">&para;</a></h3>
-<pre><code class="bash">docker run --rm -v ${PWD}:/local -w /local swaggerapi/swagger-codegen-cli validate \
+<div class="codehilite"><pre><span></span>docker run --rm -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/local -w /local swaggerapi/swagger-codegen-cli validate <span class="se">\</span>
     -i task-tracker-api.yaml
-</code></pre>
+</pre></div>
+
 
 <h3 id="generate-client">Generate Client<a class="headerlink" href="#generate-client" title="Permanent link">&para;</a></h3>
 <p>Filename: <code>codegen_config.json</code></p>
-<pre><code>{
-  &quot;artifactId&quot;: &quot;tracker&quot;,
-  &quot;groupId&quot;: &quot;com.example.tracker&quot;,
-  &quot;basePackage&quot;: &quot;com.example.tracker&quot;,
-  &quot;apiPackage&quot;: &quot;com.example.tracker.api&quot;,
-  &quot;configPackage&quot;: &quot;com.example.tracker.config&quot;,
-  &quot;modelPackage&quot;: &quot;com.example.tracker.model&quot;,
-  &quot;hideGenerationTimestamp&quot;: true,
-  &quot;dateLibrary&quot;: &quot;java8&quot;,
-  &quot;useBeanValidation&quot;: true,
-  &quot;licenseUrl&quot;: &quot;&quot;
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;artifactId&quot;</span><span class="p">:</span> <span class="s2">&quot;tracker&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;groupId&quot;</span><span class="p">:</span> <span class="s2">&quot;com.example.tracker&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;basePackage&quot;</span><span class="p">:</span> <span class="s2">&quot;com.example.tracker&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;apiPackage&quot;</span><span class="p">:</span> <span class="s2">&quot;com.example.tracker.api&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;configPackage&quot;</span><span class="p">:</span> <span class="s2">&quot;com.example.tracker.config&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;modelPackage&quot;</span><span class="p">:</span> <span class="s2">&quot;com.example.tracker.model&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;hideGenerationTimestamp&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;dateLibrary&quot;</span><span class="p">:</span> <span class="s2">&quot;java8&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;useBeanValidation&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;licenseUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+<span class="p">}</span>
+</pre></div>
 
-<pre><code class="bash">docker run --rm -v ${PWD}:/local -w /local swaggerapi/swagger-codegen-cli generate \
-    -i task-tracker-api.yaml \
-    --lang java \
+
+<div class="codehilite"><pre><span></span>docker run --rm -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/local -w /local swaggerapi/swagger-codegen-cli generate <span class="se">\</span>
+    -i task-tracker-api.yaml <span class="se">\</span>
+    --lang java <span class="se">\</span>
     -c codegen_config.json
-</code></pre>
+</pre></div>
+
 
 <p>Output:</p>
-<pre><code>[main] INFO io.swagger.parser.Swagger20Parser - reading from task-tracker-api.yaml
+<div class="codehilite"><pre><span></span>[main] INFO io.swagger.parser.Swagger20Parser - reading from task-tracker-api.yaml
 [main] INFO io.swagger.codegen.ignore.CodegenIgnoreProcessor - No .swagger-codegen-ignore file found.
 [main] INFO io.swagger.codegen.DefaultCodegen - Invoker Package Name, originally not set, is now dervied from api package name: com.example.tracker
 [main] INFO io.swagger.codegen.AbstractGenerator - writing file /local/./src/main/java/com/example/tracker/model/Task.java
@@ -732,10 +747,11 @@
 [main] INFO io.swagger.codegen.AbstractGenerator - writing file /local/./src/main/java/com/example/tracker/GzipRequestInterceptor.java
 [main] INFO io.swagger.codegen.AbstractGenerator - writing file /local/./.swagger-codegen-ignore
 [main] INFO io.swagger.codegen.AbstractGenerator - writing file /local/./.swagger-codegen/VERSION
-</code></pre>
+</pre></div>
+
 
 <p>Files:</p>
-<pre><code>./.gitignore
+<div class="codehilite"><pre><span></span>./.gitignore
 ./.swagger-codegen
 ./.swagger-codegen/VERSION
 ./.swagger-codegen-ignore
@@ -795,7 +811,7 @@
 ./src/test/java/com/example/tracker/api
 ./src/test/java/com/example/tracker/api/DefaultApiTest.java
 ./task-tracker-api.yaml
-</code></pre>
+</pre></div>
                 
                   
                 

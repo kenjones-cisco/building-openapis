@@ -57,7 +57,7 @@ Files:
 
 Filename: `config.properties`
 
-```
+```ini
 swagger2markup.markupLanguage=MARKDOWN
 ```
 
@@ -105,7 +105,7 @@ Files:
 
 Filename: `config.properties`
 
-```
+```ini
 swagger2markup.markupLanguage=ASCIIDOC
 ```
 

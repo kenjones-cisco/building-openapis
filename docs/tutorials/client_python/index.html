@@ -561,6 +561,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" title="API Security" class="md-nav__link">
+      API Security
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -663,28 +675,31 @@
 </ul>
 </div>
 <h3 id="validate-api-definition">Validate API Definition<a class="headerlink" href="#validate-api-definition" title="Permanent link">&para;</a></h3>
-<pre><code class="bash">docker run --rm -v ${PWD}:/local -w /local swaggerapi/swagger-codegen-cli validate \
+<div class="codehilite"><pre><span></span>docker run --rm -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/local -w /local swaggerapi/swagger-codegen-cli validate <span class="se">\</span>
     -i task-tracker-api.yaml
-</code></pre>
+</pre></div>
+
 
 <h3 id="generate-client">Generate Client<a class="headerlink" href="#generate-client" title="Permanent link">&para;</a></h3>
 <p>Filename: <code>codegen_config.json</code></p>
-<pre><code>{
-  &quot;packageName&quot;: &quot;client&quot;,
-  &quot;projectName&quot;: &quot;trackerapi&quot;,
-  &quot;hideGenerationTimestamp&quot;: true,
-  &quot;sortParamsByRequiredFlag&quot;: true
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;packageName&quot;</span><span class="p">:</span> <span class="s2">&quot;client&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;projectName&quot;</span><span class="p">:</span> <span class="s2">&quot;trackerapi&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;hideGenerationTimestamp&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;sortParamsByRequiredFlag&quot;</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">}</span>
+</pre></div>
 
-<pre><code class="bash">docker run --rm -v ${PWD}:/local -w /local swaggerapi/swagger-codegen-cli generate \
-    -i task-tracker-api.yaml \
-    --lang python \
+
+<div class="codehilite"><pre><span></span>docker run --rm -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/local -w /local swaggerapi/swagger-codegen-cli generate <span class="se">\</span>
+    -i task-tracker-api.yaml <span class="se">\</span>
+    --lang python <span class="se">\</span>
     -c codegen_config.json
-</code></pre>
+</pre></div>
+
 
 <p>Output:</p>
-<pre><code>[main] INFO io.swagger.parser.Swagger20Parser - reading from task-tracker-api.yaml
+<div class="codehilite"><pre><span></span>[main] INFO io.swagger.parser.Swagger20Parser - reading from task-tracker-api.yaml
 [main] INFO io.swagger.codegen.ignore.CodegenIgnoreProcessor - No .swagger-codegen-ignore file found.
 [main] INFO io.swagger.codegen.AbstractGenerator - writing file /local/./client/models/task.py
 [main] INFO io.swagger.codegen.AbstractGenerator - writing file /local/./test/test_task.py
@@ -712,10 +727,11 @@
 [main] INFO io.swagger.codegen.AbstractGenerator - writing file /local/./client/rest.py
 [main] INFO io.swagger.codegen.AbstractGenerator - writing file /local/./.swagger-codegen-ignore
 [main] INFO io.swagger.codegen.AbstractGenerator - writing file /local/./.swagger-codegen/VERSION
-</code></pre>
+</pre></div>
+
 
 <p>Files:</p>
-<pre><code>./.gitignore
+<div class="codehilite"><pre><span></span>./.gitignore
 ./.swagger-codegen
 ./.swagger-codegen/VERSION
 ./.swagger-codegen-ignore
@@ -749,7 +765,7 @@
 ./test/__init__.py
 ./test-requirements.txt
 ./tox.ini
-</code></pre>
+</pre></div>
                 
                   
                 

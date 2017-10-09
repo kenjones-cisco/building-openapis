@@ -561,6 +561,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" title="API Security" class="md-nav__link">
+      API Security
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -663,24 +675,26 @@
 </ul>
 </div>
 <h3 id="validate-api-definition">Validate API Definition<a class="headerlink" href="#validate-api-definition" title="Permanent link">&para;</a></h3>
-<pre><code class="bash">docker run --rm -v ${PWD}:/local -w /local quay.io/goswagger/swagger validate task-tracker-api.yaml
-</code></pre>
+<div class="codehilite"><pre><span></span>docker run --rm -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/local -w /local quay.io/goswagger/swagger validate task-tracker-api.yaml
+</pre></div>
+
 
 <h3 id="generate-client">Generate Client<a class="headerlink" href="#generate-client" title="Permanent link">&para;</a></h3>
 <p>Update the GOPATH environment variable within the container by appending the base directory; e.g. <code>/tracker</code>.
 Mount the project root directory to base directory <code>/tracker/src/&lt;import path&gt;</code> where the <code>&lt;import path&gt;</code>
 is how you import a golang package.</p>
-<pre><code class="bash">docker run --rm \
-    -e GOPATH='/go:/tracker' \
-    -v ${PWD}:/tracker/src/github.com/myorg/go-trackerclient \
-    -w /tracker/src/github.com/myorg/go-trackerclient \
-    quay.io/goswagger/swagger generate client \
-        -A TrackerApi \
+<div class="codehilite"><pre><span></span>docker run --rm <span class="se">\</span>
+    -e <span class="nv">GOPATH</span><span class="o">=</span><span class="s1">&#39;/go:/tracker&#39;</span> <span class="se">\</span>
+    -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/tracker/src/github.com/myorg/go-trackerclient <span class="se">\</span>
+    -w /tracker/src/github.com/myorg/go-trackerclient <span class="se">\</span>
+    quay.io/goswagger/swagger generate client <span class="se">\</span>
+        -A TrackerApi <span class="se">\</span>
         -f task-tracker-api.yaml
-</code></pre>
+</pre></div>
+
 
 <p>Output:</p>
-<pre><code>2017/10/06 01:55:25 building a plan for generation
+<div class="codehilite"><pre><span></span>2017/10/06 01:55:25 building a plan for generation
 2017/10/06 01:55:25 planning definitions
 2017/10/06 01:55:25 planning operations
 2017/10/06 01:55:25 grouping operations into packages
@@ -741,10 +755,11 @@ For this generation to compile you need to have some packages in your GOPATH:
   * golang.org/x/net/context/ctxhttp
 
 You can get these now with: go get -u -f ./...
-</code></pre>
+</pre></div>
+
 
 <p>Files:</p>
-<pre><code>./client
+<div class="codehilite"><pre><span></span>./client
 ./client/operations
 ./client/operations/create_task_parameters.go
 ./client/operations/create_task_responses.go
@@ -761,7 +776,7 @@ You can get these now with: go get -u -f ./...
 ./models/task.go
 ./models/user.go
 ./task-tracker-api.yaml
-</code></pre>
+</pre></div>
                 
                   
                 

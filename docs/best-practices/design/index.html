@@ -588,6 +588,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/security/" title="API Security" class="md-nav__link">
+      API Security
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -861,44 +873,51 @@ specification, our Web APIs should return relevant HTTP status codes.</p>
 <p>When performing GET on a collection clients will need the ability to filter, sort, paginate, and/or limit fields in the results.</p>
 <p><strong>Filtering</strong></p>
 <p>Use a unique query parameter for all fields or a query language for filtering.</p>
-<pre><code>GET /cars?color=red
-GET /cars?seats&lt;=2
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="err">GET /cars?color=red</span>
+<span class="err">GET /cars?seats&lt;=2</span>
+</pre></div>
+
 
 <p><strong>Sorting</strong></p>
 <p>Allow ascending and descending sorting over multiple fields.</p>
-<pre><code>GET /cars?sort=-manufactorer,+model
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="err">GET /cars?sort=-manufactorer,+model</span>
+</pre></div>
+
 
 <p><strong>Field Selection</strong></p>
 <p>Mobile clients display just a few attributes in a list. They don’t need all attributes of a resource.
 Give the API consumer the ability to choose returned fields. This will also reduce the network traffic
 and speed up the usage of the API.</p>
-<pre><code>GET /cars?fields=manufacturer,model,id,color
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="err">GET /cars?fields=manufacturer,model,id,color</span>
+</pre></div>
+
 
 <p><strong>Paging</strong></p>
 <p>Use limit and offset. It is flexible for the user and common in leading databases.</p>
-<pre><code>GET /cars?offset=10&amp;limit=5
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="err">GET /cars?offset=10&amp;limit=5</span>
+</pre></div>
+
 
 <p>Use the HTTP Header <code>Link</code> to return a set of ready-made links.</p>
-<pre><code>Link: &lt;https://api.github.com/user/repos?page=3&amp;per_page=100&gt;; rel=&quot;next&quot;, &lt;https://api.github.com/user/repos?page=50&amp;per_page=100&gt;; rel=&quot;last&quot;
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="nt">Link</span><span class="o">:</span> <span class="o">&lt;</span><span class="nt">https</span><span class="o">://</span><span class="nt">api</span><span class="p">.</span><span class="nc">github</span><span class="p">.</span><span class="nc">com</span><span class="o">/</span><span class="nt">user</span><span class="o">/</span><span class="nt">repos</span><span class="o">?</span><span class="nt">page</span><span class="o">=</span><span class="nt">3</span><span class="o">&amp;</span><span class="nt">per_page</span><span class="o">=</span><span class="nt">100</span><span class="o">&gt;;</span> <span class="nt">rel</span><span class="o">=</span><span class="s2">&quot;next&quot;</span><span class="o">,</span> <span class="o">&lt;</span><span class="nt">https</span><span class="o">://</span><span class="nt">api</span><span class="p">.</span><span class="nc">github</span><span class="p">.</span><span class="nc">com</span><span class="o">/</span><span class="nt">user</span><span class="o">/</span><span class="nt">repos</span><span class="o">?</span><span class="nt">page</span><span class="o">=</span><span class="nt">50</span><span class="o">&amp;</span><span class="nt">per_page</span><span class="o">=</span><span class="nt">100</span><span class="o">&gt;;</span> <span class="nt">rel</span><span class="o">=</span><span class="s2">&quot;last&quot;</span>
+</pre></div>
+
 
 <p>An API that requires sending a count can use a custom HTTP header like <code>X-Total-Count</code>.</p>
 <h4 id="versioning">Versioning<a class="headerlink" href="#versioning" title="Permanent link">&para;</a></h4>
 <p>Always version your API. Use <a href="http://semver.org/">Semantic Versioning</a> <i class="fa fa-external-link"></i> for defining versions.</p>
 <p>The major version should be included in the URL.</p>
-<pre><code>/blog/api/v1
-</code></pre>
+<div class="codehilite"><pre><span></span>/blog/api/v1
+</pre></div>
+
 
 <p>Use HTTP content type negotiation to expose minor verions. Leverage the versioned vnd content types.</p>
 <p>There is an <a href="https://tools.ietf.org/html/rfc6838#section-3.2">HTTP RFC 6838</a> <i class="fa fa-external-link"></i> for custom vendor-specific MIME types.
 It reserves a whole “vendor tree”, with free-form entries looking like type/vnd.producer’s name followed
 by media type name [+suffix]</p>
-<pre><code>application/vnd.crowbar.v2.3+json
-</code></pre>
+<div class="codehilite"><pre><span></span>application/vnd.crowbar.v2.3+json
+</pre></div>
+
 
 <p>In this case, the major version provides structural stability of the API as a whole while the
 minor versions accounts for smaller changes (field deprecations, endpoint changes, etc).</p>

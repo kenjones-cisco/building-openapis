@@ -26,7 +26,7 @@ docker run --rm -v ${PWD}:/local -w /local swaggerapi/swagger-codegen-cli valida
 
 Filename: `codegen_config.json`
 
-```
+```json
 {
   "artifactId": "tracker",
   "groupId": "com.example.tracker",

@@ -569,6 +569,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" title="API Security" class="md-nav__link">
+      API Security
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -685,127 +697,141 @@
 </ul>
 </div>
 <h3 id="validate-api-definition">Validate API Definition<a class="headerlink" href="#validate-api-definition" title="Permanent link">&para;</a></h3>
-<pre><code class="bash">docker run --rm -v ${PWD}:/local -w /local swaggerapi/swagger-codegen-cli validate \
+<div class="codehilite"><pre><span></span>docker run --rm -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/local -w /local swaggerapi/swagger-codegen-cli validate <span class="se">\</span>
     -i task-tracker-api.yaml
-</code></pre>
+</pre></div>
+
 
 <h3 id="generate-html-documentation">Generate HTML Documentation<a class="headerlink" href="#generate-html-documentation" title="Permanent link">&para;</a></h3>
-<pre><code class="bash">docker run --rm -v ${PWD}:/local -w /local swaggerapi/swagger-codegen-cli generate \
-    -i task-tracker-api.yaml \
-    -l html \
+<div class="codehilite"><pre><span></span>docker run --rm -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/local -w /local swaggerapi/swagger-codegen-cli generate <span class="se">\</span>
+    -i task-tracker-api.yaml <span class="se">\</span>
+    -l html <span class="se">\</span>
     -o /local/docs
-</code></pre>
+</pre></div>
+
 
 <p>Output:</p>
-<pre><code>[main] INFO io.swagger.parser.Swagger20Parser - reading from task-tracker-api.yaml
+<div class="codehilite"><pre><span></span>[main] INFO io.swagger.parser.Swagger20Parser - reading from task-tracker-api.yaml
 [main] WARN io.swagger.codegen.ignore.CodegenIgnoreProcessor - Output directory does not exist, or is inaccessible. No file (.swager-codegen-ignore) will be evaluated.
 [main] INFO io.swagger.codegen.AbstractGenerator - writing file /local/docs/index.html
 [main] INFO io.swagger.codegen.AbstractGenerator - writing file /local/docs/.swagger-codegen-ignore
 [main] INFO io.swagger.codegen.AbstractGenerator - writing file /local/docs/.swagger-codegen/VERSION
-</code></pre>
+</pre></div>
+
 
 <p>Files:</p>
-<pre><code>./docs
+<div class="codehilite"><pre><span></span>./docs
 ./docs/.swagger-codegen
 ./docs/.swagger-codegen/VERSION
 ./docs/.swagger-codegen-ignore
 ./docs/index.html
 ./task-tracker-api.yaml
-</code></pre>
+</pre></div>
+
 
 <h3 id="generate-markdown-documentation">Generate Markdown Documentation<a class="headerlink" href="#generate-markdown-documentation" title="Permanent link">&para;</a></h3>
 <p>Filename: <code>config.properties</code></p>
-<pre><code>swagger2markup.markupLanguage=MARKDOWN
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="na">swagger2markup.markupLanguage</span><span class="o">=</span><span class="s">MARKDOWN</span>
+</pre></div>
 
-<pre><code class="bash">docker run --rm -v ${PWD}:/local -w /local swagger2markup/swagger2markup convert \
-    -i task-tracker-api.yaml \
-    -c config.properties \
+
+<div class="codehilite"><pre><span></span>docker run --rm -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/local -w /local swagger2markup/swagger2markup convert <span class="se">\</span>
+    -i task-tracker-api.yaml <span class="se">\</span>
+    -c config.properties <span class="se">\</span>
     -d /local/docs
-</code></pre>
+</pre></div>
+
 
 <p>Output:</p>
-<pre><code>01:06:16.904 [main] INFO  io.swagger.parser.Swagger20Parser - reading from /local/task-tracker-api.yaml
-01:06:17.292 [main] DEBUG i.g.s.i.document.PathsDocument - Generate examples is disabled.
-01:06:17.292 [main] DEBUG i.g.s.i.document.PathsDocument - Create separated operation files is disabled.
-01:06:17.293 [main] DEBUG i.g.s.i.document.DefinitionsDocument - Create separated definition files is disabled.
-01:06:17.335 [main] INFO  i.g.s.m.b.i.markdown.MarkdownBuilder - Markup document written to: /local/docs/overview.md
-01:06:17.417 [main] DEBUG i.g.s.i.document.PathsDocument - Operation processed : 'createTask' (normalized id = 'createTask')
-01:06:17.421 [main] DEBUG i.g.s.i.document.PathsDocument - Operation processed : 'listTasks' (normalized id = 'listTasks')
-01:06:17.423 [main] DEBUG i.g.s.i.document.PathsDocument - Operation processed : 'viewTask' (normalized id = 'viewTask')
-01:06:17.425 [main] DEBUG i.g.s.i.document.PathsDocument - Operation processed : 'updateTask' (normalized id = 'updateTask')
-01:06:17.433 [main] INFO  i.g.s.m.b.i.markdown.MarkdownBuilder - Markup document written to: /local/docs/paths.md
-01:06:17.436 [main] DEBUG i.g.s.i.document.DefinitionsDocument - Definition processed : 'Task'
-01:06:17.443 [main] DEBUG i.g.s.i.document.DefinitionsDocument - Definition processed : 'User'
-01:06:17.456 [main] INFO  i.g.s.m.b.i.markdown.MarkdownBuilder - Markup document written to: /local/docs/definitions.md
-01:06:17.463 [main] INFO  i.g.s.m.b.i.markdown.MarkdownBuilder - Markup document written to: /local/docs/security.md
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="mi">01</span><span class="o">:</span><span class="mi">06</span><span class="o">:</span><span class="mf">16.904</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">io</span><span class="o">.</span><span class="na">swagger</span><span class="o">.</span><span class="na">parser</span><span class="o">.</span><span class="na">Swagger20Parser</span> <span class="o">-</span> <span class="n">reading</span> <span class="n">from</span> <span class="sr">/local/</span><span class="n">task</span><span class="o">-</span><span class="n">tracker</span><span class="o">-</span><span class="n">api</span><span class="o">.</span><span class="na">yaml</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">06</span><span class="o">:</span><span class="mf">17.292</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">DEBUG</span> <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">document</span><span class="o">.</span><span class="na">PathsDocument</span> <span class="o">-</span> <span class="n">Generate</span> <span class="n">examples</span> <span class="k">is</span> <span class="n">disabled</span><span class="o">.</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">06</span><span class="o">:</span><span class="mf">17.292</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">DEBUG</span> <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">document</span><span class="o">.</span><span class="na">PathsDocument</span> <span class="o">-</span> <span class="n">Create</span> <span class="n">separated</span> <span class="n">operation</span> <span class="n">files</span> <span class="k">is</span> <span class="n">disabled</span><span class="o">.</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">06</span><span class="o">:</span><span class="mf">17.293</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">DEBUG</span> <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">document</span><span class="o">.</span><span class="na">DefinitionsDocument</span> <span class="o">-</span> <span class="n">Create</span> <span class="n">separated</span> <span class="n">definition</span> <span class="n">files</span> <span class="k">is</span> <span class="n">disabled</span><span class="o">.</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">06</span><span class="o">:</span><span class="mf">17.335</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">m</span><span class="o">.</span><span class="na">b</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">markdown</span><span class="o">.</span><span class="na">MarkdownBuilder</span> <span class="o">-</span> <span class="n">Markup</span> <span class="n">document</span> <span class="n">written</span> <span class="n">to</span><span class="o">:</span> <span class="sr">/local/docs/</span><span class="n">overview</span><span class="o">.</span><span class="na">md</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">06</span><span class="o">:</span><span class="mf">17.417</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">DEBUG</span> <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">document</span><span class="o">.</span><span class="na">PathsDocument</span> <span class="o">-</span> <span class="n">Operation</span> <span class="n">processed</span> <span class="o">:</span> <span class="s1">&#39;createTask&#39;</span> <span class="o">(</span><span class="n">normalized</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;createTask&#39;</span><span class="o">)</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">06</span><span class="o">:</span><span class="mf">17.421</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">DEBUG</span> <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">document</span><span class="o">.</span><span class="na">PathsDocument</span> <span class="o">-</span> <span class="n">Operation</span> <span class="n">processed</span> <span class="o">:</span> <span class="s1">&#39;listTasks&#39;</span> <span class="o">(</span><span class="n">normalized</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;listTasks&#39;</span><span class="o">)</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">06</span><span class="o">:</span><span class="mf">17.423</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">DEBUG</span> <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">document</span><span class="o">.</span><span class="na">PathsDocument</span> <span class="o">-</span> <span class="n">Operation</span> <span class="n">processed</span> <span class="o">:</span> <span class="s1">&#39;viewTask&#39;</span> <span class="o">(</span><span class="n">normalized</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;viewTask&#39;</span><span class="o">)</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">06</span><span class="o">:</span><span class="mf">17.425</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">DEBUG</span> <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">document</span><span class="o">.</span><span class="na">PathsDocument</span> <span class="o">-</span> <span class="n">Operation</span> <span class="n">processed</span> <span class="o">:</span> <span class="s1">&#39;updateTask&#39;</span> <span class="o">(</span><span class="n">normalized</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;updateTask&#39;</span><span class="o">)</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">06</span><span class="o">:</span><span class="mf">17.433</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">m</span><span class="o">.</span><span class="na">b</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">markdown</span><span class="o">.</span><span class="na">MarkdownBuilder</span> <span class="o">-</span> <span class="n">Markup</span> <span class="n">document</span> <span class="n">written</span> <span class="n">to</span><span class="o">:</span> <span class="sr">/local/docs/</span><span class="n">paths</span><span class="o">.</span><span class="na">md</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">06</span><span class="o">:</span><span class="mf">17.436</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">DEBUG</span> <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">document</span><span class="o">.</span><span class="na">DefinitionsDocument</span> <span class="o">-</span> <span class="n">Definition</span> <span class="n">processed</span> <span class="o">:</span> <span class="s1">&#39;Task&#39;</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">06</span><span class="o">:</span><span class="mf">17.443</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">DEBUG</span> <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">document</span><span class="o">.</span><span class="na">DefinitionsDocument</span> <span class="o">-</span> <span class="n">Definition</span> <span class="n">processed</span> <span class="o">:</span> <span class="s1">&#39;User&#39;</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">06</span><span class="o">:</span><span class="mf">17.456</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">m</span><span class="o">.</span><span class="na">b</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">markdown</span><span class="o">.</span><span class="na">MarkdownBuilder</span> <span class="o">-</span> <span class="n">Markup</span> <span class="n">document</span> <span class="n">written</span> <span class="n">to</span><span class="o">:</span> <span class="sr">/local/docs/</span><span class="n">definitions</span><span class="o">.</span><span class="na">md</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">06</span><span class="o">:</span><span class="mf">17.463</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">m</span><span class="o">.</span><span class="na">b</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">markdown</span><span class="o">.</span><span class="na">MarkdownBuilder</span> <span class="o">-</span> <span class="n">Markup</span> <span class="n">document</span> <span class="n">written</span> <span class="n">to</span><span class="o">:</span> <span class="sr">/local/docs/s</span><span class="n">ecurity</span><span class="o">.</span><span class="na">md</span>
+</pre></div>
+
 
 <p>Files:</p>
-<pre><code>./config.properties
+<div class="codehilite"><pre><span></span>./config.properties
 ./docs
 ./docs/definitions.md
 ./docs/overview.md
 ./docs/paths.md
 ./docs/security.md
 ./task-tracker-api.yaml
-</code></pre>
+</pre></div>
+
 
 <h3 id="generate-asciidoc-documentation">Generate AsciiDoc Documentation<a class="headerlink" href="#generate-asciidoc-documentation" title="Permanent link">&para;</a></h3>
 <p>Filename: <code>config.properties</code></p>
-<pre><code>swagger2markup.markupLanguage=ASCIIDOC
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="na">swagger2markup.markupLanguage</span><span class="o">=</span><span class="s">ASCIIDOC</span>
+</pre></div>
 
-<pre><code class="bash">docker run --rm -v ${PWD}:/local -w /local swagger2markup/swagger2markup convert \
-    -i task-tracker-api.yaml \
-    -c config.properties \
+
+<div class="codehilite"><pre><span></span>docker run --rm -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/local -w /local swagger2markup/swagger2markup convert <span class="se">\</span>
+    -i task-tracker-api.yaml <span class="se">\</span>
+    -c config.properties <span class="se">\</span>
     -d /local/docs
-</code></pre>
+</pre></div>
+
 
 <p>Output:</p>
-<pre><code>01:08:52.218 [main] INFO  io.swagger.parser.Swagger20Parser - reading from /local/task-tracker-api.yaml
-01:08:52.671 [main] DEBUG i.g.s.i.document.PathsDocument - Generate examples is disabled.
-01:08:52.671 [main] DEBUG i.g.s.i.document.PathsDocument - Create separated operation files is disabled.
-01:08:52.672 [main] DEBUG i.g.s.i.document.DefinitionsDocument - Create separated definition files is disabled.
-01:08:52.968 [main] INFO  i.g.s.m.b.i.asciidoc.AsciiDocBuilder - Markup document written to: /local/docs/overview.adoc
-01:08:53.098 [main] DEBUG i.g.s.i.document.PathsDocument - Operation processed : 'createTask' (normalized id = 'createTask')
-01:08:53.108 [main] DEBUG i.g.s.i.document.PathsDocument - Operation processed : 'listTasks' (normalized id = 'listTasks')
-01:08:53.132 [main] DEBUG i.g.s.i.document.PathsDocument - Operation processed : 'viewTask' (normalized id = 'viewTask')
-01:08:53.146 [main] DEBUG i.g.s.i.document.PathsDocument - Operation processed : 'updateTask' (normalized id = 'updateTask')
-01:08:53.157 [main] INFO  i.g.s.m.b.i.asciidoc.AsciiDocBuilder - Markup document written to: /local/docs/paths.adoc
-01:08:53.161 [main] DEBUG i.g.s.i.document.DefinitionsDocument - Definition processed : 'Task'
-01:08:53.203 [main] DEBUG i.g.s.i.document.DefinitionsDocument - Definition processed : 'User'
-01:08:53.230 [main] INFO  i.g.s.m.b.i.asciidoc.AsciiDocBuilder - Markup document written to: /local/docs/definitions.adoc
-01:08:53.239 [main] INFO  i.g.s.m.b.i.asciidoc.AsciiDocBuilder - Markup document written to: /local/docs/security.adoc
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="mi">01</span><span class="o">:</span><span class="mi">08</span><span class="o">:</span><span class="mf">52.218</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">io</span><span class="o">.</span><span class="na">swagger</span><span class="o">.</span><span class="na">parser</span><span class="o">.</span><span class="na">Swagger20Parser</span> <span class="o">-</span> <span class="n">reading</span> <span class="n">from</span> <span class="sr">/local/</span><span class="n">task</span><span class="o">-</span><span class="n">tracker</span><span class="o">-</span><span class="n">api</span><span class="o">.</span><span class="na">yaml</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">08</span><span class="o">:</span><span class="mf">52.671</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">DEBUG</span> <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">document</span><span class="o">.</span><span class="na">PathsDocument</span> <span class="o">-</span> <span class="n">Generate</span> <span class="n">examples</span> <span class="k">is</span> <span class="n">disabled</span><span class="o">.</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">08</span><span class="o">:</span><span class="mf">52.671</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">DEBUG</span> <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">document</span><span class="o">.</span><span class="na">PathsDocument</span> <span class="o">-</span> <span class="n">Create</span> <span class="n">separated</span> <span class="n">operation</span> <span class="n">files</span> <span class="k">is</span> <span class="n">disabled</span><span class="o">.</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">08</span><span class="o">:</span><span class="mf">52.672</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">DEBUG</span> <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">document</span><span class="o">.</span><span class="na">DefinitionsDocument</span> <span class="o">-</span> <span class="n">Create</span> <span class="n">separated</span> <span class="n">definition</span> <span class="n">files</span> <span class="k">is</span> <span class="n">disabled</span><span class="o">.</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">08</span><span class="o">:</span><span class="mf">52.968</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">m</span><span class="o">.</span><span class="na">b</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">asciidoc</span><span class="o">.</span><span class="na">AsciiDocBuilder</span> <span class="o">-</span> <span class="n">Markup</span> <span class="n">document</span> <span class="n">written</span> <span class="n">to</span><span class="o">:</span> <span class="sr">/local/docs/</span><span class="n">overview</span><span class="o">.</span><span class="na">adoc</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">08</span><span class="o">:</span><span class="mf">53.098</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">DEBUG</span> <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">document</span><span class="o">.</span><span class="na">PathsDocument</span> <span class="o">-</span> <span class="n">Operation</span> <span class="n">processed</span> <span class="o">:</span> <span class="s1">&#39;createTask&#39;</span> <span class="o">(</span><span class="n">normalized</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;createTask&#39;</span><span class="o">)</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">08</span><span class="o">:</span><span class="mf">53.108</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">DEBUG</span> <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">document</span><span class="o">.</span><span class="na">PathsDocument</span> <span class="o">-</span> <span class="n">Operation</span> <span class="n">processed</span> <span class="o">:</span> <span class="s1">&#39;listTasks&#39;</span> <span class="o">(</span><span class="n">normalized</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;listTasks&#39;</span><span class="o">)</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">08</span><span class="o">:</span><span class="mf">53.132</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">DEBUG</span> <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">document</span><span class="o">.</span><span class="na">PathsDocument</span> <span class="o">-</span> <span class="n">Operation</span> <span class="n">processed</span> <span class="o">:</span> <span class="s1">&#39;viewTask&#39;</span> <span class="o">(</span><span class="n">normalized</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;viewTask&#39;</span><span class="o">)</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">08</span><span class="o">:</span><span class="mf">53.146</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">DEBUG</span> <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">document</span><span class="o">.</span><span class="na">PathsDocument</span> <span class="o">-</span> <span class="n">Operation</span> <span class="n">processed</span> <span class="o">:</span> <span class="s1">&#39;updateTask&#39;</span> <span class="o">(</span><span class="n">normalized</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;updateTask&#39;</span><span class="o">)</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">08</span><span class="o">:</span><span class="mf">53.157</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">m</span><span class="o">.</span><span class="na">b</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">asciidoc</span><span class="o">.</span><span class="na">AsciiDocBuilder</span> <span class="o">-</span> <span class="n">Markup</span> <span class="n">document</span> <span class="n">written</span> <span class="n">to</span><span class="o">:</span> <span class="sr">/local/docs/</span><span class="n">paths</span><span class="o">.</span><span class="na">adoc</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">08</span><span class="o">:</span><span class="mf">53.161</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">DEBUG</span> <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">document</span><span class="o">.</span><span class="na">DefinitionsDocument</span> <span class="o">-</span> <span class="n">Definition</span> <span class="n">processed</span> <span class="o">:</span> <span class="s1">&#39;Task&#39;</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">08</span><span class="o">:</span><span class="mf">53.203</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">DEBUG</span> <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">document</span><span class="o">.</span><span class="na">DefinitionsDocument</span> <span class="o">-</span> <span class="n">Definition</span> <span class="n">processed</span> <span class="o">:</span> <span class="s1">&#39;User&#39;</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">08</span><span class="o">:</span><span class="mf">53.230</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">m</span><span class="o">.</span><span class="na">b</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">asciidoc</span><span class="o">.</span><span class="na">AsciiDocBuilder</span> <span class="o">-</span> <span class="n">Markup</span> <span class="n">document</span> <span class="n">written</span> <span class="n">to</span><span class="o">:</span> <span class="sr">/local/docs/</span><span class="n">definitions</span><span class="o">.</span><span class="na">adoc</span>
+<span class="mi">01</span><span class="o">:</span><span class="mi">08</span><span class="o">:</span><span class="mf">53.239</span> <span class="o">[</span><span class="n">main</span><span class="o">]</span> <span class="n">INFO</span>  <span class="n">i</span><span class="o">.</span><span class="na">g</span><span class="o">.</span><span class="na">s</span><span class="o">.</span><span class="na">m</span><span class="o">.</span><span class="na">b</span><span class="o">.</span><span class="na">i</span><span class="o">.</span><span class="na">asciidoc</span><span class="o">.</span><span class="na">AsciiDocBuilder</span> <span class="o">-</span> <span class="n">Markup</span> <span class="n">document</span> <span class="n">written</span> <span class="n">to</span><span class="o">:</span> <span class="sr">/local/docs/s</span><span class="n">ecurity</span><span class="o">.</span><span class="na">adoc</span>
+</pre></div>
+
 
 <p>Files:</p>
-<pre><code>./config.properties
+<div class="codehilite"><pre><span></span>./config.properties
 ./docs
 ./docs/definitions.adoc
 ./docs/overview.adoc
 ./docs/paths.adoc
 ./docs/security.adoc
 ./task-tracker-api.yaml
-</code></pre>
+</pre></div>
+
 
 <p>Optionally convert generated AsciiDoc file(s) and any other custom AsciiDoc file(s) to <code>html5</code></p>
 <p>Filename: <code>docs/index.adoc</code></p>
-<pre><code>include::overview.adoc[]
+<div class="codehilite"><pre><span></span>include::overview.adoc[]
 include::security.adoc[]
 include::paths.adoc[]
 include::definitions.adoc[]
-</code></pre>
+</pre></div>
 
-<pre><code class="bash">docker run --rm -v ${PWD}:/local -w /local asciidoctor/docker-asciidoctor asciidoctor -v \
-    -a doctype=book \
-    -b html5 \
+
+<div class="codehilite"><pre><span></span>docker run --rm -v <span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>:/local -w /local asciidoctor/docker-asciidoctor asciidoctor -v <span class="se">\</span>
+    -a <span class="nv">doctype</span><span class="o">=</span>book <span class="se">\</span>
+    -b html5 <span class="se">\</span>
     -D content /local/docs/index.adoc
-</code></pre>
+</pre></div>
+
 
 <p>Output: N/A</p>
 <p>Files:</p>
-<pre><code>./config.properties
+<div class="codehilite"><pre><span></span>./config.properties
 ./content
 ./content/index.html
 ./docs
@@ -815,7 +841,7 @@ include::definitions.adoc[]
 ./docs/paths.adoc
 ./docs/security.adoc
 ./task-tracker-api.yaml
-</code></pre>
+</pre></div>
                 
                   
                 
@@ -849,13 +875,13 @@ include::definitions.adoc[]
           </a>
         
         
-          <a href="../../license/" title="License" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../security/" title="API Security" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                License
+                API Security
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
