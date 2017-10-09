@@ -652,11 +652,15 @@
 <p>Instrument your server code, with the most important aspects being the capture of every request
 and corresponding response. If you make calls to other services using their API then capture the
 request and response those calls.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be sure to mask sensitive data elements. e.g. Credit Card numbers, passwords, etc.</p>
+</div>
 <p>As part of this instrumentation, at the start of each request generate a unique id to associate
 with each log message related to that request. It is strongly recommended to include the same
 unique id as part of the response back to the caller. If there is an error or other issue, then
 the user can provide that id which can be used to find the logs associated with their specific
-request for easier problem resolution.</p>
+request for easier problem resolution. The unique id is also referred to as <a href="http://theburningmonk.com/2015/05/a-consistent-approach-to-track-correlation-ids-through-microservices/">CorrelationID</a> <i class="fa fa-external-link"></i>.</p>
 <p>The logs should be published to a central logging service like ELK or Splunk.</p>
 <h3 id="capture-metrics">Capture Metrics<a class="headerlink" href="#capture-metrics" title="Permanent link">&para;</a></h3>
 <p>Capture metrics about request processing to help identify bottle necks, hot zones, and impacts
@@ -679,6 +683,8 @@ or no response within X period of time).</p>
 <p>The notifications can be done in multiple different approaches, for example emails, text messages,
 dashboard alerts, published events, and message on collaboration platform.</p>
 <h3 id="synthetic-transactions">Synthetic Transactions<a class="headerlink" href="#synthetic-transactions" title="Permanent link">&para;</a></h3>
+<p>Synthetic transactions are actions, run in real time, that are performed on monitored API endpoints.
+You can use synthetic transactions to measure the performance of a monitored API endpoint.</p>
 <p>Automated execution of 1 or more APIs that exercise the functionality of the APIs within the
 production system at a set interval. Ideal for GET and for resources that have full CRUD support
 (POST/GET/PUT/PATCH/DELETE).</p>
@@ -687,6 +693,7 @@ metrics for your APIs on a reoccurring interval even if users / clients are not 
 specific API. Also the continued use of the APIs allows you to proactively identify outages,
 performance degradation, and other possible issues as the Monitoring and Alerting will send
 notifications when issues arise.</p>
+<p>Similar to <a href="https://en.wikipedia.org/wiki/Synthetic_monitoring">Synthetic Monitoring</a> <i class="fa fa-external-link"></i> used on web based applications.</p>
                 
                   
                 
