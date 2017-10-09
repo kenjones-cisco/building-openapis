@@ -6,11 +6,14 @@ Instrument your server code, with the most important aspects being the capture o
 and corresponding response. If you make calls to other services using their API then capture the
 request and response those calls.
 
+!!! warning
+    Be sure to mask sensitive data elements. e.g. Credit Card numbers, passwords, etc.
+
 As part of this instrumentation, at the start of each request generate a unique id to associate
 with each log message related to that request. It is strongly recommended to include the same
 unique id as part of the response back to the caller. If there is an error or other issue, then
 the user can provide that id which can be used to find the logs associated with their specific
-request for easier problem resolution.
+request for easier problem resolution. The unique id is also referred to as [CorrelationID](http://theburningmonk.com/2015/05/a-consistent-approach-to-track-correlation-ids-through-microservices/) :fa-external-link:.
 
 The logs should be published to a central logging service like ELK or Splunk.
 
@@ -48,6 +51,9 @@ dashboard alerts, published events, and message on collaboration platform.
 
 ### Synthetic Transactions
 
+Synthetic transactions are actions, run in real time, that are performed on monitored API endpoints.
+You can use synthetic transactions to measure the performance of a monitored API endpoint.
+
 Automated execution of 1 or more APIs that exercise the functionality of the APIs within the
 production system at a set interval. Ideal for GET and for resources that have full CRUD support
 (POST/GET/PUT/PATCH/DELETE).
@@ -57,3 +63,5 @@ metrics for your APIs on a reoccurring interval even if users / clients are not 
 specific API. Also the continued use of the APIs allows you to proactively identify outages,
 performance degradation, and other possible issues as the Monitoring and Alerting will send
 notifications when issues arise.
+
+Similar to [Synthetic Monitoring](https://en.wikipedia.org/wiki/Synthetic_monitoring) :fa-external-link: used on web based applications.
