@@ -458,6 +458,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#build-server" title="Build Server" class="md-nav__link">
+    Build Server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-server" title="Run Server" class="md-nav__link">
+    Run Server
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-requests-and-responses" title="Example Requests and Responses" class="md-nav__link">
+    Example Requests and Responses
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -573,6 +600,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../correlation_id/" title="Correlation Id" class="md-nav__link">
+      Correlation Id
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -634,6 +673,33 @@
   <a href="#generate-server" title="Generate Server" class="md-nav__link">
     Generate Server
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-server" title="Build Server" class="md-nav__link">
+    Build Server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-server" title="Run Server" class="md-nav__link">
+    Run Server
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-requests-and-responses" title="Example Requests and Responses" class="md-nav__link">
+    Example Requests and Responses
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -763,6 +829,70 @@
 ./task-tracker-api.yaml
 ./test-requirements.txt
 ./tox.ini
+</pre></div>
+
+
+<h3 id="build-server">Build Server<a class="headerlink" href="#build-server" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span>docker build --tag tracker-pylocal .
+</pre></div>
+
+
+<h3 id="run-server">Run Server<a class="headerlink" href="#run-server" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span>docker run -d --rm -p <span class="m">8080</span>:8080 tracker-pylocal
+</pre></div>
+
+
+<h4 id="example-requests-and-responses">Example Requests and Responses<a class="headerlink" href="#example-requests-and-responses" title="Permanent link">&para;</a></h4>
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s localhost:8080/v1/tasks
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">17</span>
+<span class="na">Server</span><span class="o">:</span> <span class="l">Werkzeug/0.12.2 Python/3.6.3</span>
+<span class="na">Date</span><span class="o">:</span> <span class="l">Tue, 10 Oct 2017 17:21:51 GMT</span>
+
+<span class="s2">&quot;do some magic!&quot;</span>
+</pre></div>
+
+
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s localhost:8080/v1/tasks/1
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">17</span>
+<span class="na">Server</span><span class="o">:</span> <span class="l">Werkzeug/0.12.2 Python/3.6.3</span>
+<span class="na">Date</span><span class="o">:</span> <span class="l">Tue, 10 Oct 2017 17:22:28 GMT</span>
+
+<span class="s2">&quot;do some magic!&quot;</span>
+</pre></div>
+
+
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s -X PUT localhost:8080/v1/tasks/1
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">400</span> <span class="ne">BAD REQUEST</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/problem+json</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">115</span>
+<span class="na">Server</span><span class="o">:</span> <span class="l">Werkzeug/0.12.2 Python/3.6.3</span>
+<span class="na">Date</span><span class="o">:</span> <span class="l">Tue, 10 Oct 2017 17:23:04 GMT</span>
+
+<span class="p">{</span>
+  <span class="nt">&quot;detail&quot;</span><span class="p">:</span> <span class="s2">&quot;None is not of type &#39;object&#39;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
+  <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Bad Request&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;about:blank&quot;</span>
+<span class="p">}</span>
 </pre></div>
                 
                   

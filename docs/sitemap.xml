@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2017-10-09</lastmod>
+     <lastmod>2017-10-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -13,25 +13,25 @@
         
     <url>
      <loc>/references/rest/</loc>
-     <lastmod>2017-10-09</lastmod>
+     <lastmod>2017-10-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/references/openapi/</loc>
-     <lastmod>2017-10-09</lastmod>
+     <lastmod>2017-10-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/references/design/</loc>
-     <lastmod>2017-10-09</lastmod>
+     <lastmod>2017-10-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/references/development/</loc>
-     <lastmod>2017-10-09</lastmod>
+     <lastmod>2017-10-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -41,13 +41,13 @@
         
     <url>
      <loc>/best-practices/design/</loc>
-     <lastmod>2017-10-09</lastmod>
+     <lastmod>2017-10-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/best-practices/implementation/</loc>
-     <lastmod>2017-10-09</lastmod>
+     <lastmod>2017-10-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -57,7 +57,7 @@
         
     <url>
      <loc>/tutorials/setup/</loc>
-     <lastmod>2017-10-09</lastmod>
+     <lastmod>2017-10-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -75,13 +75,19 @@
         
     <url>
      <loc>/tutorials/documentation/</loc>
-     <lastmod>2017-10-09</lastmod>
+     <lastmod>2017-10-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tutorials/security/</loc>
-     <lastmod>2017-10-09</lastmod>
+     <lastmod>2017-10-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/tutorials/correlation_id/</loc>
+     <lastmod>2017-10-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -90,7 +96,7 @@
     
     <url>
      <loc>/license/</loc>
-     <lastmod>2017-10-09</lastmod>
+     <lastmod>2017-10-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

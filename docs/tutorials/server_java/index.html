@@ -446,6 +446,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#build-server" title="Build Server" class="md-nav__link">
+    Build Server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-server" title="Run Server" class="md-nav__link">
+    Run Server
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-requests-and-responses" title="Example Requests and Responses" class="md-nav__link">
+    Example Requests and Responses
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -573,6 +600,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../correlation_id/" title="Correlation Id" class="md-nav__link">
+      Correlation Id
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -634,6 +673,33 @@
   <a href="#generate-server" title="Generate Server" class="md-nav__link">
     Generate Server
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-server" title="Build Server" class="md-nav__link">
+    Build Server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-server" title="Run Server" class="md-nav__link">
+    Run Server
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-requests-and-responses" title="Example Requests and Responses" class="md-nav__link">
+    Example Requests and Responses
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -759,6 +825,164 @@
 ./src/main/resources
 ./src/main/resources/application.properties
 ./task-tracker-api.yaml
+</pre></div>
+
+
+<h3 id="build-server">Build Server<a class="headerlink" href="#build-server" title="Permanent link">&para;</a></h3>
+<p>Create a simple <code>Dockerfile</code> to use for running the server. There are multiple different approaches
+for compiling the server within a docker image. This is the simplest but there are more efficient
+approaches.</p>
+<p>Filename: <code>Dockerfile</code></p>
+<div class="codehilite"><pre><span></span><span class="k">FROM</span><span class="s"> maven:3.5-jdk-8</span>
+
+<span class="k">WORKDIR</span><span class="s"> /opt/tracker</span>
+
+COPY pom.xml /opt/tracker/pom.xml
+COPY src /opt/tracker/src
+
+<span class="k">RUN</span> mvn -e package -Dmaven.test.skip<span class="o">=</span><span class="nb">true</span> -DskipTests
+
+<span class="k">CMD</span><span class="s"> [&quot;java&quot;, &quot;-jar&quot;, &quot;/opt/tracker/target/tracker-1.0.0.jar&quot;]</span>
+<span class="k">EXPOSE</span><span class="s"> 8080</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>docker build --tag tracker-javalocal .
+</pre></div>
+
+
+<h3 id="run-server">Run Server<a class="headerlink" href="#run-server" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span>docker run -d --rm -p <span class="m">8080</span>:8080 tracker-javalocal
+</pre></div>
+
+
+<h4 id="example-requests-and-responses">Example Requests and Responses<a class="headerlink" href="#example-requests-and-responses" title="Permanent link">&para;</a></h4>
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s localhost:8080/v1/tasks
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="err">HTTP/1.1 415</span>
+<span class="err">Content-Type: application/json;charset=UTF-8</span>
+<span class="err">Transfer-Encoding: chunked</span>
+<span class="err">Date: Tue, 10 Oct 2017 19:24:11 GMT</span>
+
+<span class="err">{&quot;timestamp&quot;:&quot;2017-10-10T19:24:11.807Z&quot;,&quot;status&quot;:415,&quot;error&quot;:&quot;Unsupported Media Type&quot;,&quot;exception&quot;:&quot;org.springframework.web.HttpMediaTypeNotSupportedException&quot;,&quot;message&quot;:&quot;Content type &#39;null&#39; not supported&quot;,&quot;path&quot;:&quot;/v1/tasks&quot;}</span>
+</pre></div>
+
+
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s -H <span class="s2">&quot;Content-type: application/json&quot;</span> localhost:8080/v1/tasks
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="err">HTTP/1.1 200</span>
+<span class="err">Content-Length: 0</span>
+<span class="err">Date: Tue, 10 Oct 2017 19:26:14 GMT</span>
+</pre></div>
+
+
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s localhost:8080/v1/tasks/1
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="err">HTTP/1.1 415</span>
+<span class="err">Content-Type: application/json;charset=UTF-8</span>
+<span class="err">Transfer-Encoding: chunked</span>
+<span class="err">Date: Tue, 10 Oct 2017 19:24:40 GMT</span>
+
+<span class="err">{&quot;timestamp&quot;:&quot;2017-10-10T19:24:40.968Z&quot;,&quot;status&quot;:415,&quot;error&quot;:&quot;Unsupported Media Type&quot;,&quot;exception&quot;:&quot;org.springframework.web.HttpMediaTypeNotSupportedException&quot;,&quot;message&quot;:&quot;Content type &#39;null&#39; not supported&quot;,&quot;path&quot;:&quot;/v1/tasks/1&quot;}</span>
+</pre></div>
+
+
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s -H <span class="s2">&quot;Content-type: application/json&quot;</span> localhost:8080/v1/tasks/1
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="err">HTTP/1.1 400</span>
+<span class="err">Content-Type: application/json;charset=UTF-8</span>
+<span class="err">Transfer-Encoding: chunked</span>
+<span class="err">Date: Tue, 10 Oct 2017 19:26:56 GMT</span>
+<span class="err">Connection: close</span>
+
+<span class="err">{&quot;timestamp&quot;:&quot;2017-10-10T19:26:56.527Z&quot;,&quot;status&quot;:400,&quot;error&quot;:&quot;Bad Request&quot;,&quot;exception&quot;:&quot;org.springframework.web.method.annotation.MethodArgumentTypeMismatchException&quot;,&quot;message&quot;:&quot;Failed to convert value of type &#39;java.lang.String&#39; to required type &#39;java.util.UUID&#39;; nested exception is java.lang.IllegalArgumentException: Invalid UUID string: 1&quot;,&quot;path&quot;:&quot;/v1/tasks/1&quot;}</span>
+</pre></div>
+
+
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s -H <span class="s2">&quot;Content-type: application/json&quot;</span> localhost:8080/v1/tasks/6ba2cd8d-d548-41b6-8b5c-98cc45af2313
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="err">HTTP/1.1 200</span>
+<span class="err">Content-Length: 0</span>
+<span class="err">Date: Tue, 10 Oct 2017 19:30:04 GMT</span>
+</pre></div>
+
+
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s -X PUT localhost:8080/v1/tasks/1
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="err">HTTP/1.1 415</span>
+<span class="err">Content-Type: application/json;charset=UTF-8</span>
+<span class="err">Transfer-Encoding: chunked</span>
+<span class="err">Date: Tue, 10 Oct 2017 19:25:08 GMT</span>
+
+<span class="err">{&quot;timestamp&quot;:&quot;2017-10-10T19:25:08.538Z&quot;,&quot;status&quot;:415,&quot;error&quot;:&quot;Unsupported Media Type&quot;,&quot;exception&quot;:&quot;org.springframework.web.HttpMediaTypeNotSupportedException&quot;,&quot;message&quot;:&quot;Content type &#39;null&#39; not supported&quot;,&quot;path&quot;:&quot;/v1/tasks/1&quot;}</span>
+</pre></div>
+
+
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s -X PUT -H <span class="s2">&quot;Content-type: application/json&quot;</span> localhost:8080/v1/tasks/1
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="err">HTTP/1.1 400</span>
+<span class="err">Content-Type: application/json;charset=UTF-8</span>
+<span class="err">Transfer-Encoding: chunked</span>
+<span class="err">Date: Tue, 10 Oct 2017 19:29:14 GMT</span>
+<span class="err">Connection: close</span>
+
+<span class="err">{&quot;timestamp&quot;:&quot;2017-10-10T19:29:14.464Z&quot;,&quot;status&quot;:400,&quot;error&quot;:&quot;Bad Request&quot;,&quot;exception&quot;:&quot;org.springframework.web.method.annotation.MethodArgumentTypeMismatchException&quot;,&quot;message&quot;:&quot;Failed to convert value of type &#39;java.lang.String&#39; to required type &#39;java.util.UUID&#39;; nested exception is java.lang.IllegalArgumentException: Invalid UUID string: 1&quot;,&quot;path&quot;:&quot;/v1/tasks/1&quot;}</span>
+</pre></div>
+
+
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s -X PUT -H <span class="s2">&quot;Content-type: application/json&quot;</span> localhost:8080/v1/tasks/6ba2cd8d-d548-41b6-8b5c-98cc45af2313
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="err">HTTP/1.1 400</span>
+<span class="err">Content-Type: application/json;charset=UTF-8</span>
+<span class="err">Transfer-Encoding: chunked</span>
+<span class="err">Date: Tue, 10 Oct 2017 19:30:59 GMT</span>
+<span class="err">Connection: close</span>
+
+<span class="err">{&quot;timestamp&quot;:&quot;2017-10-10T19:30:59.651Z&quot;,&quot;status&quot;:400,&quot;error&quot;:&quot;Bad Request&quot;,&quot;exception&quot;:&quot;org.springframework.http.converter.HttpMessageNotReadableException&quot;,&quot;message&quot;:&quot;Required request body is missing: public default org.springframework.http.ResponseEntity&lt;com.example.tracker.model.Task&gt; com.example.tracker.api.TasksApi.updateTask(java.util.UUID,com.example.tracker.model.Task,java.util.UUID,java.lang.String) throws java.lang.Exception&quot;,&quot;path&quot;:&quot;/v1/tasks/6ba2cd8d-d548-41b6-8b5c-98cc45af2313&quot;}</span>
+</pre></div>
+
+
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s -X PUT -H <span class="s2">&quot;Content-type: application/json&quot;</span> -d <span class="s1">&#39;{}&#39;</span> localhost:8080/v1/tasks/6ba2cd8d-d548-41b6-8b5c-98cc45af2313
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="err">HTTP/1.1 200</span>
+<span class="err">Content-Length: 0</span>
+<span class="err">Date: Tue, 10 Oct 2017 19:32:38 GMT</span>
 </pre></div>
                 
                   

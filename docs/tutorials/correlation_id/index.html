@@ -1,0 +1,1611 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+        <meta name="author" content="Kenny Jones">
+      
+      
+        <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.10.2">
+    
+    
+      
+        <title>Correlation Id - Building OpenAPIs</title>
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr-e826f8942a.js"></script>
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application-408828a02a.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/font-awesome.css">
+    
+    
+  </head>
+  
+  
+  
+  
+    <body>
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Building OpenAPIs" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon md-icon--home"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+                <span class="md-header-nav__parent">
+                  Tutorials
+                </span>
+              
+            
+            Correlation Id
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">&#xE5CD;</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="" data-md-lang-tokenizer="[\s\-]+">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/kenjones-cisco/building-openapis" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      kenjones-cisco/building-openapis
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <div class="md-nav__button md-logo">
+      
+        <i class="md-icon md-icon--home"></i>
+      
+    </div>
+    Building OpenAPIs
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/kenjones-cisco/building-openapis" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      kenjones-cisco/building-openapis
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      References
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        References
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/rest/" title="REST APIs" class="md-nav__link">
+      REST APIs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/openapi/" title="OpenAPI" class="md-nav__link">
+      OpenAPI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/design/" title="API Design" class="md-nav__link">
+      API Design
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../references/development/" title="API Development" class="md-nav__link">
+      API Development
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Best Practices
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Best Practices
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../best-practices/design/" title="API Design" class="md-nav__link">
+      API Design
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../best-practices/implementation/" title="API Implementation" class="md-nav__link">
+      API Implementation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../setup/" title="Setup" class="md-nav__link">
+      Setup
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2">
+    
+    <label class="md-nav__link" for="nav-4-2">
+      Generating Server Stubs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-2">
+        Generating Server Stubs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../server_golang/" title="Golang API Server" class="md-nav__link">
+      Golang API Server
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../server_java/" title="Java API Server" class="md-nav__link">
+      Java API Server
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../server_python/" title="Python API Server" class="md-nav__link">
+      Python API Server
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+    
+    <label class="md-nav__link" for="nav-4-3">
+      Generating Clients
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        Generating Clients
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../client_golang/" title="Golang API Client" class="md-nav__link">
+      Golang API Client
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../client_java/" title="Java API Client" class="md-nav__link">
+      Java API Client
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../client_python/" title="Python API Client" class="md-nav__link">
+      Python API Client
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../client_postman/" title="Postman API Client" class="md-nav__link">
+      Postman API Client
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../documentation/" title="Generating Documentation" class="md-nav__link">
+      Generating Documentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/" title="API Security" class="md-nav__link">
+      API Security
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Correlation Id
+      </label>
+    
+    <a href="./" title="Correlation Id" class="md-nav__link md-nav__link--active">
+      Correlation Id
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#adding-correlation-id" title="Adding Correlation Id" class="md-nav__link">
+    Adding Correlation Id
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modify-api-definition" title="Modify API Definition" class="md-nav__link">
+    Modify API Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-implementation" title="Java Implementation" class="md-nav__link">
+    Java Implementation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-requests-and-responses" title="Example Requests and Responses" class="md-nav__link">
+    Example Requests and Responses
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#golang-implementation" title="Golang Implementation" class="md-nav__link">
+    Golang Implementation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-requests-and-responses_1" title="Example Requests and Responses" class="md-nav__link">
+    Example Requests and Responses
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation" title="Python Implementation" class="md-nav__link">
+    Python Implementation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-requests-and-responses_2" title="Example Requests and Responses" class="md-nav__link">
+    Example Requests and Responses
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../license/" title="License" class="md-nav__link">
+      License
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#adding-correlation-id" title="Adding Correlation Id" class="md-nav__link">
+    Adding Correlation Id
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modify-api-definition" title="Modify API Definition" class="md-nav__link">
+    Modify API Definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#java-implementation" title="Java Implementation" class="md-nav__link">
+    Java Implementation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-requests-and-responses" title="Example Requests and Responses" class="md-nav__link">
+    Example Requests and Responses
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#golang-implementation" title="Golang Implementation" class="md-nav__link">
+    Golang Implementation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-requests-and-responses_1" title="Example Requests and Responses" class="md-nav__link">
+    Example Requests and Responses
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-implementation" title="Python Implementation" class="md-nav__link">
+    Python Implementation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-requests-and-responses_2" title="Example Requests and Responses" class="md-nav__link">
+    Example Requests and Responses
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Correlation Id</h1>
+                
+                <h2 id="adding-correlation-id">Adding Correlation Id<a class="headerlink" href="#adding-correlation-id" title="Permanent link">&para;</a></h2>
+<h3 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h3>
+<p>This tutorial will explain how to add a Correlation Id to an API.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Prerequisite <a href="../setup/"><strong>Environment Setup</strong></a></p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<ul>
+<li><code>${PWD}</code> works on Linux, MacOS, and Windows (via Powershell)</li>
+<li><code>%cd%</code> works on Windows (via cmd)</li>
+<li><code>$(cygpath -m -a "$(pwd)")</code> works on Windows (via Cygwin)</li>
+</ul>
+</div>
+<h3 id="modify-api-definition">Modify API Definition<a class="headerlink" href="#modify-api-definition" title="Permanent link">&para;</a></h3>
+<p>The actual header key to use can vary based on most published resources. The most common header keys are:</p>
+<ul>
+<li><code>X-Request-Id</code></li>
+<li><code>X-Correlation-Id</code></li>
+</ul>
+<p>Just be consistent within the API definition to avoid confusion by clients and developers.</p>
+<p>Add the following details to your API definition.</p>
+<div class="codehilite"><pre><span></span><span class="c1"># Define globally and then reference within the parameter(s) of each path item</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">request_id</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">X-Request-Id</span>
+        <span class="l l-Scalar l-Scalar-Plain">in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">header</span>
+        <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Unique identifer associated with request</span>
+        <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uuid</span>
+
+<span class="c1"># Add to each operation response</span>
+          <span class="l l-Scalar l-Scalar-Plain">headers</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">X-Request-Id</span><span class="p p-Indicator">:</span>
+              <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Unique identifer associated with request</span>
+              <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+              <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uuid</span>
+</pre></div>
+
+
+<p>The parameter should <strong>not</strong> be required as the value should only be created by a calling client.
+By always returning the value back to a caller with the response, the caller can use that value for
+logging or as a way to provide an identifier for a specific request to a support team.</p>
+<p>Filename: <code>task-tracker-api.yaml</code></p>
+<div class="codehilite"><pre><span></span><span class="c1"># Original source</span>
+<span class="c1"># https://raw.githubusercontent.com/go-swagger/go-swagger/master/examples/task-tracker/swagger.yml</span>
+<span class="l l-Scalar l-Scalar-Plain">swagger</span><span class="p p-Indicator">:</span> <span class="s">&quot;2.0&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">info</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Issue Tracker</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+        <span class="no">This application implements a very simple issue tracker.</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">&quot;1.0.0&quot;</span>
+
+<span class="l l-Scalar l-Scalar-Plain">schemes</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">http</span>
+
+<span class="l l-Scalar l-Scalar-Plain">produces</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">application/json</span>
+<span class="l l-Scalar l-Scalar-Plain">consumes</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">application/json</span>
+
+<span class="c1"># API versioning (Major Version)</span>
+<span class="l l-Scalar l-Scalar-Plain">basePath</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/v1</span>
+
+<span class="l l-Scalar l-Scalar-Plain">definitions</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">Task</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Task</span>
+        <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">&gt;</span>
+          <span class="no">Task is the main entity in this application. Everything revolves around</span>
+          <span class="no">tasks and managing them.</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
+        <span class="l l-Scalar l-Scalar-Plain">properties</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">The id of the task.</span>
+            <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">&gt;-</span>
+              <span class="no">A unique identifier for the task. These are created in ascending order.</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+            <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uuid</span>
+          <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">The title of the task.</span>
+            <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+              <span class="no">The title for a task.</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">The description of the task.</span>
+            <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">&gt;</span>
+              <span class="no">The task description is a longer, more detailed description of the issue.</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+          <span class="l l-Scalar l-Scalar-Plain">severity</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">integer</span>
+            <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">int32</span>
+          <span class="l l-Scalar l-Scalar-Plain">effort</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">the level of effort required to get this task completed</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">integer</span>
+            <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">int32</span>
+          <span class="l l-Scalar l-Scalar-Plain">status</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">the status of the issue</span>
+            <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+              <span class="no">the status of the issue</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+          <span class="l l-Scalar l-Scalar-Plain">assignedTo</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/User&#39;</span>
+          <span class="l l-Scalar l-Scalar-Plain">reportedBy</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/User&#39;</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">User</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">User</span>
+        <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">&gt;</span>
+          <span class="no">This representation of a user is mainly meant for inclusion in other</span>
+          <span class="no">models, or for list views.</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">object</span>
+        <span class="l l-Scalar l-Scalar-Plain">properties</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">A unique identifier for a user.</span>
+            <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">&gt;</span>
+              <span class="no">This id is automatically generated on the server when a user is created.</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+            <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uuid</span>
+          <span class="l l-Scalar l-Scalar-Plain">screenName</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">The screen name for the user.</span>
+            <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+              <span class="no">This is used for vanity type urls as well as login credentials.</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+
+<span class="c1"># define global parameters for reuse</span>
+<span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">request_id</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">X-Request-Id</span>
+        <span class="l l-Scalar l-Scalar-Plain">in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">header</span>
+        <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Unique identifer associated with request</span>
+        <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+        <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+        <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uuid</span>
+
+<span class="l l-Scalar l-Scalar-Plain">paths</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">/tasks</span><span class="p p-Indicator">:</span>
+        <span class="c1"># reference the global parameter &quot;request_id&quot;</span>
+        <span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&quot;#/parameters/request_id&quot;</span>
+        <span class="l l-Scalar l-Scalar-Plain">get</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">operationId</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">listTasks</span>
+          <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Lists the tasks</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+            <span class="no">List tasks.</span>
+          <span class="l l-Scalar l-Scalar-Plain">responses</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">200</span><span class="p p-Indicator">:</span>
+              <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Successful response</span>
+              <span class="c1"># add &quot;X-Request-Id&quot; to response header</span>
+              <span class="l l-Scalar l-Scalar-Plain">headers</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">X-Request-Id</span><span class="p p-Indicator">:</span>
+                  <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Unique identifer associated with request</span>
+                  <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+                  <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uuid</span>
+              <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">title</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">TaskList</span>
+                <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">array</span>
+                <span class="l l-Scalar l-Scalar-Plain">items</span><span class="p p-Indicator">:</span>
+                  <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Task&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">post</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">operationId</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">createTask</span>
+          <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Creates a &#39;Task&#39; object.</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+            <span class="no">Allows for creating a task.</span>
+          <span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">body</span>
+              <span class="l l-Scalar l-Scalar-Plain">in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">body</span>
+              <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">The task to create</span>
+              <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+              <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Task&#39;</span>
+          <span class="l l-Scalar l-Scalar-Plain">responses</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">201</span><span class="p p-Indicator">:</span>
+              <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Task created</span>
+              <span class="c1"># add &quot;X-Request-Id&quot; to response header</span>
+              <span class="l l-Scalar l-Scalar-Plain">headers</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">X-Request-Id</span><span class="p p-Indicator">:</span>
+                  <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Unique identifer associated with request</span>
+                  <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+                  <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uuid</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">/tasks/{id}</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">id</span>
+            <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">The id of the task</span>
+            <span class="l l-Scalar l-Scalar-Plain">in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">path</span>
+            <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+            <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+            <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uuid</span>
+          <span class="c1"># reference the global parameter &quot;request_id&quot;</span>
+          <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&quot;#/parameters/request_id&quot;</span>
+        <span class="l l-Scalar l-Scalar-Plain">get</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">operationId</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">viewTask</span>
+          <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Gets the details for a task.</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+            <span class="no">The details view of a task.</span>
+          <span class="l l-Scalar l-Scalar-Plain">responses</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">200</span><span class="p p-Indicator">:</span>
+              <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Task details</span>
+              <span class="c1"># add &quot;X-Request-Id&quot; to response header</span>
+              <span class="l l-Scalar l-Scalar-Plain">headers</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">X-Request-Id</span><span class="p p-Indicator">:</span>
+                  <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Unique identifer associated with request</span>
+                  <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+                  <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uuid</span>
+              <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Task&#39;</span>
+        <span class="l l-Scalar l-Scalar-Plain">put</span><span class="p p-Indicator">:</span>
+          <span class="l l-Scalar l-Scalar-Plain">operationId</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">updateTask</span>
+          <span class="l l-Scalar l-Scalar-Plain">summary</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Updates the details for a task.</span>
+          <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">|</span>
+            <span class="no">Allows for updating a task.</span>
+          <span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">body</span>
+              <span class="l l-Scalar l-Scalar-Plain">in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">body</span>
+              <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">The task to update</span>
+              <span class="l l-Scalar l-Scalar-Plain">required</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+              <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Task&#39;</span>
+          <span class="l l-Scalar l-Scalar-Plain">responses</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">200</span><span class="p p-Indicator">:</span>
+              <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Task details</span>
+              <span class="c1"># add &quot;X-Request-Id&quot; to response header</span>
+              <span class="l l-Scalar l-Scalar-Plain">headers</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">X-Request-Id</span><span class="p p-Indicator">:</span>
+                  <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Unique identifer associated with request</span>
+                  <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+                  <span class="l l-Scalar l-Scalar-Plain">format</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uuid</span>
+              <span class="l l-Scalar l-Scalar-Plain">schema</span><span class="p p-Indicator">:</span>
+                <span class="l l-Scalar l-Scalar-Plain">$ref</span><span class="p p-Indicator">:</span> <span class="s">&#39;#/definitions/Task&#39;</span>
+</pre></div>
+
+
+<h3 id="java-implementation">Java Implementation<a class="headerlink" href="#java-implementation" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="../server_java/#validate-api-definition">Validate</a> modified API Definition</li>
+<li><a href="../server_java/#generate-server">Generate</a> server using modified API definition</li>
+</ul>
+<p>Define a simple request scoped component <code>Correlation.java</code></p>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nn">com.example.tracker.config</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.UUID</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Scope</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.ScopedProxyMode</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Component</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.context.WebApplicationContext</span><span class="o">;</span>
+
+<span class="nd">@Component</span>
+<span class="nd">@Scope</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="n">WebApplicationContext</span><span class="o">.</span><span class="na">SCOPE_REQUEST</span><span class="o">,</span> <span class="n">proxyMode</span> <span class="o">=</span> <span class="n">ScopedProxyMode</span><span class="o">.</span><span class="na">TARGET_CLASS</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Correlation</span> <span class="o">{</span>
+  <span class="kd">private</span> <span class="n">UUID</span> <span class="n">id</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="n">UUID</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">id</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">id</span> <span class="o">=</span> <span class="n">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="n">UUID</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>Define a request filter <code>request/filter/CorrelationFilter.java</code></p>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nn">com.example.tracker.request.filter</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.example.tracker.config.Correlation</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.ConcurrentHashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.Filter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.FilterChain</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.FilterConfig</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.ServletRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.ServletResponse</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequestWrapper</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponseWrapper</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.commons.lang3.StringUtils</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Component</span><span class="o">;</span>
+
+
+<span class="nd">@Component</span><span class="o">(</span><span class="s">&quot;CorrelationFilter&quot;</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CorrelationFilter</span> <span class="kd">implements</span> <span class="n">Filter</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">REQUEST_ID_HEADER</span> <span class="o">=</span> <span class="s">&quot;X-Request-Id&quot;</span><span class="o">;</span>
+
+    <span class="nd">@Autowired</span> <span class="kd">private</span> <span class="n">Correlation</span> <span class="n">correlation</span><span class="o">;</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * {@inheritDoc}</span>
+<span class="cm">     */</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">(</span><span class="n">FilterConfig</span> <span class="n">filterConfig</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ServletException</span> <span class="o">{</span>
+        <span class="c1">// empty method</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * {@inheritDoc}</span>
+<span class="cm">     */</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">destroy</span><span class="o">()</span> <span class="o">{</span>
+        <span class="c1">// empty method</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * {@inheritDoc}</span>
+<span class="cm">     */</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doFilter</span><span class="o">(</span><span class="n">ServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="n">ServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="n">FilterChain</span> <span class="n">chain</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">ServletException</span> <span class="o">{</span>
+
+        <span class="k">if</span> <span class="o">(</span> <span class="n">request</span> <span class="k">instanceof</span> <span class="n">HttpServletRequest</span> <span class="o">&amp;&amp;</span> <span class="n">response</span> <span class="k">instanceof</span> <span class="n">HttpServletResponse</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="n">doHttpFilter</span><span class="o">((</span><span class="n">HttpServletRequest</span><span class="o">)</span><span class="n">request</span><span class="o">,</span> <span class="o">(</span><span class="n">HttpServletResponse</span><span class="o">)</span><span class="n">response</span><span class="o">,</span> <span class="n">chain</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="c1">// otherwise just pass through</span>
+            <span class="n">chain</span><span class="o">.</span><span class="na">doFilter</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">response</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * Performs &#39;enrichment&#39; of incoming HTTP request and response.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param request the http servlet request</span>
+<span class="cm">     * @param response the http servlet response</span>
+<span class="cm">     * @param chain the filter processing chain</span>
+<span class="cm">     * @throws IOException if any error occurs</span>
+<span class="cm">     * @throws ServletException if any error occurs</span>
+<span class="cm">     */</span>
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">doHttpFilter</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="n">FilterChain</span> <span class="n">chain</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">ServletException</span> <span class="o">{</span>
+
+        <span class="n">String</span> <span class="n">requestId</span> <span class="o">=</span> <span class="n">getRequestId</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
+        <span class="c1">// verifies the correlation id was set</span>
+        <span class="k">if</span> <span class="o">(</span> <span class="n">StringUtils</span><span class="o">.</span><span class="na">isBlank</span><span class="o">(</span><span class="n">requestId</span><span class="o">)</span> <span class="o">)</span> <span class="o">{</span>
+            <span class="n">requestId</span> <span class="o">=</span> <span class="n">correlation</span><span class="o">.</span><span class="na">getId</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="c1">// populates the attribute</span>
+        <span class="kd">final</span> <span class="n">ServletRequest</span> <span class="n">req</span> <span class="o">=</span> <span class="n">enrichRequest</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="n">requestId</span><span class="o">);</span>
+        <span class="kd">final</span> <span class="n">ServletResponse</span> <span class="n">resp</span> <span class="o">=</span> <span class="n">enrichResponse</span><span class="o">(</span><span class="n">response</span><span class="o">,</span> <span class="n">requestId</span><span class="o">);</span>
+
+        <span class="c1">// proceeds with execution</span>
+        <span class="n">chain</span><span class="o">.</span><span class="na">doFilter</span><span class="o">(</span><span class="n">req</span><span class="o">,</span> <span class="n">resp</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="n">String</span> <span class="nf">getRequestId</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="na">getHeader</span><span class="o">(</span><span class="n">REQUEST_ID_HEADER</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="n">ServletRequest</span> <span class="nf">enrichRequest</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="n">String</span> <span class="n">correlationId</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="kd">final</span> <span class="n">CorrelatedServletRequest</span> <span class="n">req</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CorrelatedServletRequest</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
+        <span class="n">req</span><span class="o">.</span><span class="na">setHeader</span><span class="o">(</span><span class="n">REQUEST_ID_HEADER</span><span class="o">,</span> <span class="n">correlationId</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">req</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="n">ServletResponse</span> <span class="nf">enrichResponse</span><span class="o">(</span><span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span> <span class="n">String</span> <span class="n">correlationId</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="kd">final</span> <span class="n">HttpServletResponseWrapper</span> <span class="n">resp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HttpServletResponseWrapper</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+        <span class="n">resp</span><span class="o">.</span><span class="na">setHeader</span><span class="o">(</span><span class="n">REQUEST_ID_HEADER</span><span class="o">,</span> <span class="n">correlationId</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">resp</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * An http servlet wrapper that allows to register additional HTTP headers.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @author Jakub Narloch</span>
+<span class="cm">     */</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">CorrelatedServletRequest</span> <span class="kd">extends</span> <span class="n">HttpServletRequestWrapper</span> <span class="o">{</span>
+
+        <span class="cm">/**</span>
+<span class="cm">         * Map with additional customizable headers.</span>
+<span class="cm">         */</span>
+        <span class="kd">private</span> <span class="kd">final</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">additionalHeaders</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ConcurrentHashMap</span><span class="o">&lt;&gt;();</span>
+
+        <span class="cm">/**</span>
+<span class="cm">         * Creates a ServletRequest adaptor wrapping the given request object.</span>
+<span class="cm">         *</span>
+<span class="cm">         * @param request The request to wrap</span>
+<span class="cm">         * @throws IllegalArgumentException if the request is null</span>
+<span class="cm">         */</span>
+        <span class="kd">public</span> <span class="nf">CorrelatedServletRequest</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kd">super</span><span class="o">(</span><span class="n">request</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="cm">/**</span>
+<span class="cm">         * Sets the header value.</span>
+<span class="cm">         *</span>
+<span class="cm">         * @param key the header name</span>
+<span class="cm">         * @param value the header value</span>
+<span class="cm">         */</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setHeader</span><span class="o">(</span><span class="n">String</span> <span class="n">key</span><span class="o">,</span> <span class="n">String</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+
+            <span class="k">this</span><span class="o">.</span><span class="na">additionalHeaders</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">String</span> <span class="nf">getHeader</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span> <span class="n">additionalHeaders</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="n">additionalHeaders</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">getHeader</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">Enumeration</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">getHeaders</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+
+            <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">values</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+            <span class="k">if</span> <span class="o">(</span> <span class="n">additionalHeaders</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="n">name</span><span class="o">)</span> <span class="o">)</span> <span class="o">{</span>
+                <span class="n">values</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">additionalHeaders</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">name</span><span class="o">));</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">values</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">Collections</span><span class="o">.</span><span class="na">list</span><span class="o">(</span><span class="kd">super</span><span class="o">.</span><span class="na">getHeaders</span><span class="o">(</span><span class="n">name</span><span class="o">)));</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="n">Collections</span><span class="o">.</span><span class="na">enumeration</span><span class="o">(</span><span class="n">values</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="n">Enumeration</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">getHeaderNames</span><span class="o">()</span> <span class="o">{</span>
+
+            <span class="kd">final</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;();</span>
+            <span class="n">names</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">additionalHeaders</span><span class="o">.</span><span class="na">keySet</span><span class="o">());</span>
+            <span class="n">names</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">Collections</span><span class="o">.</span><span class="na">list</span><span class="o">(</span><span class="kd">super</span><span class="o">.</span><span class="na">getHeaderNames</span><span class="o">()));</span>
+            <span class="k">return</span> <span class="n">Collections</span><span class="o">.</span><span class="na">enumeration</span><span class="o">(</span><span class="n">names</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+<span class="o">}</span>
+</pre></div>
+
+
+<p>Update <code>pom.xml</code> by adding new dependency</p>
+<div class="codehilite"><pre><span></span>    <span class="nt">&lt;dependency&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>org.apache.commons<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>commons-lang3<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>3.5<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+</pre></div>
+
+
+<ul>
+<li><a href="../server_java/#build-server">Build</a> server using modified API definition</li>
+<li><a href="../server_java/#run-server">Run</a> server using modified API definition</li>
+</ul>
+<h4 id="example-requests-and-responses">Example Requests and Responses<a class="headerlink" href="#example-requests-and-responses" title="Permanent link">&para;</a></h4>
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s -H <span class="s2">&quot;Content-type: application/json&quot;</span> localhost:8080/v1/tasks
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="err">HTTP/1.1 200</span>
+<span class="err">X-Request-Id: 8086179e-1bb4-411a-9052-4a2375cd8406</span>
+<span class="err">Content-Length: 0</span>
+<span class="err">Date: Tue, 10 Oct 2017 20:26:29 GMT</span>
+</pre></div>
+
+
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s -H <span class="s2">&quot;Content-type: application/json&quot;</span> localhost:8080/v1/tasks/6ba2cd8d-d548-41b6-8b5c-98cc45af2313
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="err">HTTP/1.1 200</span>
+<span class="err">X-Request-Id: 2c4a7f65-73b8-458b-aada-9109f58649a4</span>
+<span class="err">Content-Length: 0</span>
+<span class="err">Date: Tue, 10 Oct 2017 20:28:23 GMT</span>
+</pre></div>
+
+
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s -X PUT -H <span class="s2">&quot;Content-type: application/json&quot;</span> -d <span class="s1">&#39;{}&#39;</span> localhost:8080/v1/tasks/6ba2cd8d-d548-41b6-8b5c-98cc45af2313
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="err">HTTP/1.1 200</span>
+<span class="err">X-Request-Id: 017ceafc-dcc2-4945-89e3-f43d4de3ead6</span>
+<span class="err">Content-Length: 0</span>
+<span class="err">Date: Tue, 10 Oct 2017 20:29:03 GMT</span>
+</pre></div>
+
+
+<h3 id="golang-implementation">Golang Implementation<a class="headerlink" href="#golang-implementation" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="../server_golang/#validate-api-definition">Validate</a> modified API Definition</li>
+<li><a href="../server_golang/#generate-server">Generate</a> server using modified API definition</li>
+</ul>
+<p>Define a simple middleware <code>restapi/requestid.go</code></p>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">restapi</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&quot;net/http&quot;</span>
+
+    <span class="nx">uuid</span> <span class="s">&quot;github.com/hashicorp/go-uuid&quot;</span>
+<span class="p">)</span>
+
+<span class="c1">// HeaderKey is the request header the value is set on.</span>
+<span class="kd">const</span> <span class="nx">HeaderKey</span> <span class="p">=</span> <span class="s">&quot;X-Request-Id&quot;</span>
+
+<span class="c1">// RequestID is a middleware that generates a unique id and adds to the request header</span>
+<span class="kd">type</span> <span class="nx">RequestID</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">next</span> <span class="nx">http</span><span class="p">.</span><span class="nx">Handler</span>
+<span class="p">}</span>
+
+<span class="c1">// NewRequestIDGenerator creates a new instance of the RequestID Middleware.</span>
+<span class="kd">func</span> <span class="nx">NewRequestIDGenerator</span><span class="p">(</span><span class="nx">next</span> <span class="nx">http</span><span class="p">.</span><span class="nx">Handler</span><span class="p">)</span> <span class="nx">http</span><span class="p">.</span><span class="nx">Handler</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&amp;</span><span class="nx">RequestID</span><span class="p">{</span><span class="nx">next</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">RequestID</span><span class="p">)</span> <span class="nx">ServeHTTP</span><span class="p">(</span><span class="nx">rw</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">id</span> <span class="o">:=</span> <span class="nx">getOrCreateID</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">Header</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="nx">HeaderKey</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nx">id</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span> <span class="p">{</span>
+        <span class="nx">r</span><span class="p">.</span><span class="nx">Header</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="nx">HeaderKey</span><span class="p">,</span> <span class="nx">id</span><span class="p">)</span>
+        <span class="nx">rw</span><span class="p">.</span><span class="nx">Header</span><span class="p">().</span><span class="nx">Set</span><span class="p">(</span><span class="nx">HeaderKey</span><span class="p">,</span> <span class="nx">id</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="nx">m</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">ServeHTTP</span><span class="p">(</span><span class="nx">rw</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nx">getOrCreateID</span><span class="p">(</span><span class="nx">v</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">v</span> <span class="o">==</span> <span class="s">&quot;&quot;</span> <span class="p">{</span>
+        <span class="nx">u</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">uuid</span><span class="p">.</span><span class="nx">GenerateUUID</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nx">u</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">v</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Add the middleware to the generated file <code>restapi/configure_tracker.go</code>.</p>
+<div class="codehilite"><pre><span></span><span class="c1">// The middleware configuration happens before anything, this middleware also applies to serving the swagger.json document.</span>
+<span class="c1">// So this is a good place to plug in a panic handling middleware, logging and metrics</span>
+<span class="kd">func</span> <span class="nx">setupGlobalMiddleware</span><span class="p">(</span><span class="nx">handler</span> <span class="nx">http</span><span class="p">.</span><span class="nx">Handler</span><span class="p">)</span> <span class="nx">http</span><span class="p">.</span><span class="nx">Handler</span> <span class="p">{</span>
+    <span class="c1">// assumes the middleware is in the same package</span>
+    <span class="k">return</span> <span class="nx">NewRequestIDGenerator</span><span class="p">(</span><span class="nx">handler</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<ul>
+<li><a href="../server_golang/#build-server">Build</a> server using modified API definition</li>
+<li><a href="../server_golang/#run-server">Run</a> server using modified API definition</li>
+</ul>
+<h4 id="example-requests-and-responses_1">Example Requests and Responses<a class="headerlink" href="#example-requests-and-responses_1" title="Permanent link">&para;</a></h4>
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s localhost:8080/v1/tasks
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">501</span> <span class="ne">Not Implemented</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">X-Request-Id</span><span class="o">:</span> <span class="l">03de5a5a-7c77-a9c0-93de-ad4268bbc227</span>
+<span class="na">Date</span><span class="o">:</span> <span class="l">Tue, 10 Oct 2017 18:06:23 GMT</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">52</span>
+
+<span class="s2">&quot;operation .ListTasks has not yet been implemented&quot;</span>
+</pre></div>
+
+
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s localhost:8080/v1/tasks/1
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">501</span> <span class="ne">Not Implemented</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">X-Request-Id</span><span class="o">:</span> <span class="l">199a1124-599e-5731-9100-741721540a4a</span>
+<span class="na">Date</span><span class="o">:</span> <span class="l">Tue, 10 Oct 2017 18:06:36 GMT</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">51</span>
+
+<span class="s2">&quot;operation .ViewTask has not yet been implemented&quot;</span>
+</pre></div>
+
+
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s -X PUT localhost:8080/v1/tasks/1
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">422</span> <span class="ne">Unprocessable Entity</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">X-Request-Id</span><span class="o">:</span> <span class="l">dd9d765f-81c6-c23d-e459-4dfb318aa816</span>
+<span class="na">Date</span><span class="o">:</span> <span class="l">Tue, 10 Oct 2017 18:08:18 GMT</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">49</span>
+
+<span class="p">{</span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="mi">602</span><span class="p">,</span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="s2">&quot;body in body is required&quot;</span><span class="p">}</span>
+</pre></div>
+
+
+<h3 id="python-implementation">Python Implementation<a class="headerlink" href="#python-implementation" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="../server_python/#validate-api-definition">Validate</a> modified API Definition</li>
+<li><a href="../server_python/#generate-server">Generate</a> server using modified API definition</li>
+</ul>
+<p>Add module <code>request_id.py</code> that provides functions to include as part of</p>
+<ul>
+<li><code>before_request</code></li>
+<li><code>after_request</code></li>
+<li><code>errorhandler</code></li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">uuid</span>
+
+<span class="kn">import</span> <span class="nn">flask</span>
+<span class="kn">from</span> <span class="nn">werkzeug.datastructures</span> <span class="kn">import</span> <span class="n">Headers</span><span class="p">,</span> <span class="n">MultiDict</span>
+
+
+<span class="n">REQ_HEADER</span> <span class="o">=</span> <span class="s1">&#39;X-Request-Id&#39;</span>
+
+
+<span class="k">def</span> <span class="nf">get_or_create_request_id</span><span class="p">():</span>
+    <span class="c1"># check if the header was provided</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="n">flask</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">headers</span>
+    <span class="n">req_id</span> <span class="o">=</span> <span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">REQ_HEADER</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">req_id</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">req_id</span>
+
+    <span class="c1"># else just generate a new one</span>
+    <span class="k">return</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">request_id</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">flask</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="s1">&#39;request_id&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="n">flask</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">request_id</span> <span class="o">=</span> <span class="n">get_or_create_request_id</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">flask</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">request_id</span>
+
+
+<span class="k">def</span> <span class="nf">set_request_id</span><span class="p">(</span><span class="n">resp</span><span class="p">):</span>
+    <span class="c1"># Some libraries, like OAuthlib, set resp.headers to non Multidict</span>
+    <span class="c1"># objects (Werkzeug Headers work as well). This is a problem because</span>
+    <span class="c1"># headers allow repeated values.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span> <span class="n">Headers</span><span class="p">)</span>
+           <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span> <span class="n">MultiDict</span><span class="p">)):</span>
+        <span class="n">resp</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="n">MultiDict</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">headers</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">resp</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">REQ_HEADER</span><span class="p">):</span>
+        <span class="n">resp</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">REQ_HEADER</span><span class="p">,</span> <span class="n">reqest_id</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="n">resp</span>
+
+
+<span class="k">def</span> <span class="nf">add_after_request_reqid_wrapper</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+    <span class="n">reqid_func</span> <span class="o">=</span> <span class="n">set_request_id</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">after_request</span><span class="p">(</span><span class="n">reqid_func</span><span class="p">)</span>
+
+    <span class="c1"># Wrap exception handlers with reqid_func</span>
+    <span class="c1"># These error handlers will still respect the behavior of the route</span>
+    <span class="k">def</span> <span class="nf">_after_request_decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">wrapped_function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">reqid_func</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">make_response</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">wrapped_function</span>
+
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s1">&#39;handle_exception&#39;</span><span class="p">):</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">handle_exception</span> <span class="o">=</span> <span class="n">_after_request_decorator</span><span class="p">(</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">handle_exception</span><span class="p">)</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">handle_user_exception</span> <span class="o">=</span> <span class="n">_after_request_decorator</span><span class="p">(</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">handle_user_exception</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Modify <code>__main__.py</code> to add hooks</p>
+<div class="codehilite"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+
+<span class="kn">import</span> <span class="nn">connexion</span>
+<span class="kn">from</span> <span class="nn">.encoder</span> <span class="kn">import</span> <span class="n">JSONEncoder</span>
+<span class="kn">from</span> <span class="nn">.request_id</span> <span class="kn">import</span> <span class="n">add_after_request_reqid_wrapper</span><span class="p">,</span> <span class="n">request_id</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">connexion</span><span class="o">.</span><span class="n">App</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">specification_dir</span><span class="o">=</span><span class="s1">&#39;./swagger/&#39;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">json_encoder</span> <span class="o">=</span> <span class="n">JSONEncoder</span>
+<span class="n">app</span><span class="o">.</span><span class="n">add_api</span><span class="p">(</span><span class="s1">&#39;swagger.yaml&#39;</span><span class="p">,</span> <span class="n">arguments</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;This application implements a very simple issue tracker. &#39;</span><span class="p">})</span>
+
+<span class="n">application</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">app</span>
+
+<span class="nd">@application.before_request</span>
+<span class="k">def</span> <span class="nf">before</span><span class="p">():</span>
+    <span class="c1"># do not return the value as that will trigger an exception</span>
+    <span class="n">request_id</span><span class="p">()</span>
+
+
+<span class="n">add_after_request_reqid_wrapper</span><span class="p">(</span><span class="n">application</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="mi">8080</span><span class="p">)</span>
+</pre></div>
+
+
+<ul>
+<li><a href="../server_python/#build-server">Build</a> server using modified API definition</li>
+<li><a href="../server_python/#run-server">Run</a> server using modified API definition</li>
+</ul>
+<h4 id="example-requests-and-responses_2">Example Requests and Responses<a class="headerlink" href="#example-requests-and-responses_2" title="Permanent link">&para;</a></h4>
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s localhost:8080/v1/tasks
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">17</span>
+<span class="na">X-Request-Id</span><span class="o">:</span> <span class="l">50e56c30-7e15-4c4b-ae83-9cf0ed6434fd</span>
+<span class="na">Server</span><span class="o">:</span> <span class="l">Werkzeug/0.12.2 Python/3.6.3</span>
+<span class="na">Date</span><span class="o">:</span> <span class="l">Tue, 10 Oct 2017 17:21:51 GMT</span>
+
+<span class="s2">&quot;do some magic!&quot;</span>
+</pre></div>
+
+
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s localhost:8080/v1/tasks/1
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">17</span>
+<span class="na">X-Request-Id</span><span class="o">:</span> <span class="l">6ba2cd8d-d548-41b6-8b5c-98cc45af2313</span>
+<span class="na">Server</span><span class="o">:</span> <span class="l">Werkzeug/0.12.2 Python/3.6.3</span>
+<span class="na">Date</span><span class="o">:</span> <span class="l">Tue, 10 Oct 2017 17:22:28 GMT</span>
+
+<span class="s2">&quot;do some magic!&quot;</span>
+</pre></div>
+
+
+<p><strong>Request</strong></p>
+<div class="codehilite"><pre><span></span>curl -D - -s -X PUT localhost:8080/v1/tasks/1
+</pre></div>
+
+
+<p><strong>Response</strong></p>
+<div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.0</span> <span class="m">400</span> <span class="ne">BAD REQUEST</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/problem+json</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">115</span>
+<span class="na">X-Request-Id</span><span class="o">:</span> <span class="l">a3677a78-00ac-4e56-858f-44f29f26aaba</span>
+<span class="na">Server</span><span class="o">:</span> <span class="l">Werkzeug/0.12.2 Python/3.6.3</span>
+<span class="na">Date</span><span class="o">:</span> <span class="l">Tue, 10 Oct 2017 17:23:04 GMT</span>
+
+<span class="p">{</span>
+  <span class="nt">&quot;detail&quot;</span><span class="p">:</span> <span class="s2">&quot;None is not of type &#39;object&#39;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
+  <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Bad Request&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;about:blank&quot;</span>
+<span class="p">}</span>
+</pre></div>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../security/" title="API Security" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                API Security
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../license/" title="License" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                License
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application-f3ab9e5ff8.js"></script>
+      
+      
+      <script>app.initialize({url:{base:"../.."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>

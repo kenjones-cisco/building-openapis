@@ -31,8 +31,8 @@ is how you import a golang package.
 ```bash
 docker run --rm \
     -e GOPATH='/go:/tracker' \
-    -v ${PWD}:/tracker/src/github.com/myorg/go-trackerclient \
-    -w /tracker/src/github.com/myorg/go-trackerclient \
+    -v ${PWD}:/tracker/src/github.com/myorg/tracker \
+    -w /tracker/src/github.com/myorg/tracker \
     quay.io/goswagger/swagger generate server \
         -A TrackerApi \
         -f task-tracker-api.yaml
@@ -180,3 +180,91 @@ Files:
 ./task-tracker-api.yaml
 ```
 
+
+### Build Server
+
+Create a simple `Dockerfile` to use for running the server. There are multiple different approaches
+for compiling the server within a docker image. This is the simplest but there are more efficient
+approaches. Checkout [Docker + Golang = &#60;3](https://blog.docker.com/2016/09/docker-golang/) :fa-external-link:
+
+
+Filename: `Dockerfile`
+
+```Dockerfile
+FROM golang:1.9
+
+ENV SRC_DIR=/go/src/github.com/myorg/tracker/
+
+WORKDIR $SRC_DIR
+COPY . $SRC_DIR
+
+RUN go get github.com/myorg/tracker/cmd/tracker-server...
+
+CMD ["/go/bin/tracker-server", "--port=8080", "--host=0.0.0.0"]
+EXPOSE 8080
+```
+
+```bash
+docker build --tag tracker-golocal .
+```
+
+
+### Run Server
+
+```bash
+docker run -d --rm -p 8080:8080 tracker-golocal
+```
+
+
+#### Example Requests and Responses
+
+**Request**
+
+```bash
+curl -D - -s localhost:8080/v1/tasks
+```
+
+**Response**
+
+```http
+HTTP/1.1 501 Not Implemented
+Content-Type: application/json
+Date: Tue, 10 Oct 2017 18:06:23 GMT
+Content-Length: 52
+
+"operation .ListTasks has not yet been implemented"
+```
+
+**Request**
+
+```bash
+curl -D - -s localhost:8080/v1/tasks/1
+```
+
+**Response**
+
+```http
+HTTP/1.1 501 Not Implemented
+Content-Type: application/json
+Date: Tue, 10 Oct 2017 18:06:36 GMT
+Content-Length: 51
+
+"operation .ViewTask has not yet been implemented"
+```
+
+**Request**
+
+```bash
+curl -D - -s -X PUT localhost:8080/v1/tasks/1
+```
+
+**Response**
+
+```http
+HTTP/1.1 422 Unprocessable Entity
+Content-Type: application/json
+Date: Tue, 10 Oct 2017 18:08:18 GMT
+Content-Length: 49
+
+{"code":602,"message":"body in body is required"}
+```

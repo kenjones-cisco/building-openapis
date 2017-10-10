@@ -113,3 +113,78 @@ Files:
 ./tox.ini
 ```
 
+
+### Build Server
+
+```bash
+docker build --tag tracker-pylocal .
+```
+
+
+### Run Server
+
+```bash
+docker run -d --rm -p 8080:8080 tracker-pylocal
+```
+
+
+#### Example Requests and Responses
+
+**Request**
+
+```bash
+curl -D - -s localhost:8080/v1/tasks
+```
+
+**Response**
+
+```http
+HTTP/1.0 200 OK
+Content-Type: application/json
+Content-Length: 17
+Server: Werkzeug/0.12.2 Python/3.6.3
+Date: Tue, 10 Oct 2017 17:21:51 GMT
+
+"do some magic!"
+```
+
+**Request**
+
+```bash
+curl -D - -s localhost:8080/v1/tasks/1
+```
+
+**Response**
+
+```http
+HTTP/1.0 200 OK
+Content-Type: application/json
+Content-Length: 17
+Server: Werkzeug/0.12.2 Python/3.6.3
+Date: Tue, 10 Oct 2017 17:22:28 GMT
+
+"do some magic!"
+```
+
+**Request**
+
+```bash
+curl -D - -s -X PUT localhost:8080/v1/tasks/1
+```
+
+**Response**
+
+```http
+HTTP/1.0 400 BAD REQUEST
+Content-Type: application/problem+json
+Content-Length: 115
+Server: Werkzeug/0.12.2 Python/3.6.3
+Date: Tue, 10 Oct 2017 17:23:04 GMT
+
+{
+  "detail": "None is not of type 'object'",
+  "status": 400,
+  "title": "Bad Request",
+  "type": "about:blank"
+}
+```

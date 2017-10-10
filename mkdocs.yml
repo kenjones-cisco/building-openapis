@@ -34,6 +34,7 @@ pages:
       - Postman API Client: tutorials/client_postman.md
     - Generating Documentation: tutorials/documentation.md
     - API Security: tutorials/security.md
+    - Correlation Id: tutorials/correlation_id.md
   - License: license.md
 
 markdown_extensions:
